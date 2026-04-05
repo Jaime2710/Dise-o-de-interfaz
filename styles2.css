@@ -10,14 +10,15 @@ font-family:"Noto Sans", sans-serif;
 background:#E5E8E1;
 }
 
-/* HEADER FULL WIDTH */
+/* Header full */
 
 .header{
 
 width:100%;
 height:80px;
-
+position: relative;
 background-color:#1F3A44;
+z-index: 1000;
 }
 
 .header-content{
@@ -94,7 +95,7 @@ background-color: #1F3A44;
 
 .categorias{
 display:flex;
-justify-content:space-between;
+gap:14px;
 margin-bottom:45px;
 }
 
@@ -135,7 +136,7 @@ margin-bottom: 48px;
 
 .productos{
 display:grid;
-grid-template-columns:repeat(4, 1fr); /* 👈 mejor que fijo */
+grid-template-columns:repeat(4, 1fr); 
 gap:24px;
 justify-items:center;
 }
@@ -154,12 +155,12 @@ padding-bottom:16px;
 box-shadow:1px 1px 5px 1px rgba(0,0,0,0.25);
 display:none;
 
-/* */
+
 flex-direction:column;
 align-items:center;
 justify-content:space-between;
 text-align:center;
-gap:10px;
+gap:5px;
 
 transition: transform 0.2s ease, opacity 0.2s ease;
 
@@ -179,8 +180,8 @@ display: flex;
 width:120px;
 height:120px;
 
-background:#d9d9d9;
-margin-bottom:8px;
+
+
 
 display:flex;
 justify-content:center;
@@ -194,9 +195,8 @@ align-items:center;
 
 font-size:25px;
 font-weight:600;
-
 text-align:center;
-
+margin:0px;
 }
 
 
@@ -235,8 +235,8 @@ font-weight: 600;
 
 /* Precio */
 .producto-precio{
-    font-size:18px;
-    
+    font-size:20px;
+    margin:0px;
 }
 
 /* Contador */
@@ -245,7 +245,7 @@ font-weight: 600;
     align-items:center;
     justify-content:center;
     gap:12px;
-    
+
 }
 
 /* Botones + - */
@@ -259,6 +259,9 @@ font-weight: 600;
     color:white;
     font-size:18px;
     cursor:pointer;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 /* Cantidad */
@@ -269,3 +272,586 @@ font-weight: 600;
     text-align:center;
 }
 
+.scroll-float{
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 40px;
+    height: 40px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* visible */
+.scroll-float.show{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* efecto click */
+.scroll-float:active{
+    transform: translateX(-50%) scale(0.9);
+}
+
+/* Progreso */
+.progreso-combos{
+display:none; 
+align-items:center;
+justify-content:space-between;
+gap:33px;
+margin-bottom:40px;
+}
+
+.paso{
+text-align:center;
+font-size:20px;
+}
+
+.paso span{
+display:inline-block;
+width:32px;
+height:32px;
+border-radius:50%;
+border: 3px solid;
+background-color:transparent;
+color:#1F3A44;
+line-height:32px;
+align-items: center;
+}
+
+.paso.activo span{
+background:#6E2C1E;
+}
+
+.linea{
+width:60px;
+height:3px;
+background:#1F3A44;
+}
+
+/* Grid combos */
+.productos.combos{
+
+display:grid;
+grid-template-columns:repeat(4, 1fr); 
+gap:24px;
+justify-items:center;
+}
+
+/* Tarjeta combo */
+.combo-card{
+width:198px;
+height:392px;
+background:#E5E8E1;
+border-radius:12px;
+box-shadow:1px 1px 5px 1px rgba(0,0,0,0.25);
+display:none;
+flex-direction:column;
+align-items:center;
+text-align:center;
+
+gap:12px;
+padding:19px;
+padding-bottom:16px;
+}
+
+.combo-card.activo {
+display:flex;
+}
+
+.combo-img{
+width:120px;
+}
+
+
+.btn-combo{
+background:#6E2C1E;
+color:white;
+border:none;
+padding:12px 24px;
+border-radius:12px;
+cursor:pointer;
+font-size: 20px;
+}
+
+.combo-precio{
+font-size:20px ;
+font-weight:400 ;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:20px;
+
+}
+.producto.descripcion{
+font-size: 16px ;
+font-weight:300 ;
+justify-content: center;
+}
+
+
+
+/* Fondo del modal sin overlay oscuro para que se integre al fondo beige */
+
+.modal {
+    position: fixed;
+    top: 80px; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #E5E8E1; 
+    z-index: 900;
+    border-bottom: 2px solid #1F3A44;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* El contenedor principal*/
+.modal-content {
+    width: 1024px; 
+    margin: 0 auto;
+    padding: 40px 80px;
+    background: transparent; 
+}
+.modal-layout {
+    display: flex; /* Cambiado de grid a flex */
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px; /* Espacio entre imagen y lista */
+    margin-bottom: 40px;
+}
+.modal-opciones-lista {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.fila-opcion {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr; 
+    align-items: center;
+    padding: 15px 0;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2E2E2E;
+    gap:40px;
+}
+
+/* Clase para ocultar suavemente */
+.hidden {
+    display: none !important;
+}
+
+.modal-producto{
+    font-size: 25px;
+    font-weight: 600;
+    color:#1F3A44;
+    margin-bottom: 32px;
+}
+.modal-subtitulo{
+    font-size: 20px;
+    font-weight: 600;
+    color:#2E2E2E;
+    margin-bottom: 58PX;
+}
+
+.modal-imagen {
+    width: 180px; 
+    flex-shrink: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-imagen img {
+    width: 100%; 
+    height: auto; 
+    object-fit: contain; 
+}
+.modal-contador {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 45px;
+}
+/* Controles de + y - */
+.mas, .menos {
+    background: #1F3A44;
+    color: #E5E8E1;
+    border: none;
+    border-radius: 12px;
+    width: 45px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.cantidad {  
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* Footer de botones */
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cancelar {
+    background: #B32821; 
+    color: #E5E8E1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width:154px;
+}
+
+.confirmar {
+    background: #005700; 
+    color: #E5E8E1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    width: 154px;
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+/* ============================================================ */
+/* MODAL DE CONFIRMACIÓN                                        */
+/* ============================================================ */
+
+#modal-confirmacion {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-confirmacion.visible {
+    display: flex;
+}
+
+.modal-conf-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.modal-conf-box {
+    position: relative;
+    z-index: 1;
+    background: #E5E8E1;
+    border-radius: 16px;
+    padding: 32px;
+    width: 480px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.modal-conf-body {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.modal-conf-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.modal-conf-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+#conf-nombre {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1F3A44;
+    margin: 0;
+}
+
+#conf-detalle {
+    font-size: 18px;
+    color: #444;
+    margin: 0;
+}
+
+#conf-total {
+    font-size: 20px;
+    font-weight: 700;
+    color: #6E2C1E;
+    margin: 0;
+}
+
+#modal-confirmacion .confirmar {
+    background: #005700;
+    color: #E5E8E1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+}
+
+#modal-confirmacion .cancelar {
+    background: #B32821;
+    color: #E5E8E1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+}
+
+/* ============================================================ */
+/* BADGE DEL CARRITO (nav)                                      */
+/* ============================================================ */
+
+#carrito-badge {
+    background: #6E2C1E;
+    color: #E5E8E1;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+#carrito-badge.visible {
+    display: inline-flex;
+}
+
+/* ============================================================ */
+/* TOAST DE NOTIFICACIÓN                                        */
+/* ============================================================ */
+
+#toast-notif {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1F3A44;
+    color: #E5E8E1;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    z-index: 3000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+#toast-notif.visible {
+    opacity: 1;
+}
+
+/* ============================================================ */
+/* VISTA DEL CARRITO                                            */
+/* ============================================================ */
+
+#vista-carrito {
+    width: 100%;
+    display: none;
+}
+
+#vista-carrito.visible {
+    display: block;
+}
+
+.carrito-instruccion {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 32px;
+}
+
+.carrito-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.carrito-item {
+    background: #E5E8E1;
+    border-radius: 12px;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.15);
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 24px;
+}
+
+.carrito-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.carrito-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.carrito-nombre {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1F3A44;
+}
+
+.carrito-variedad {
+    font-size: 16px;
+    color: #666;
+}
+
+.carrito-controles {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.ci-cant-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ci-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 10px;
+    background: #6E2C1E;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ci-cantidad {
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 24px;
+    text-align: center;
+}
+
+.ci-total {
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 80px;
+    text-align: right;
+}
+
+.ci-eliminar {
+    background: #B32821;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.carrito-vacio {
+    font-size: 22px;
+    color: #888;
+    text-align: center;
+    padding: 60px 0;
+    font-style: italic;
+}
+
+.carrito-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-top: 2px solid #1F3A44;
+}
+
+.carrito-total-label {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1F3A44;
+}
+
+.btn-vaciar {
+    background: #6E2C1E;
+    color: #E5E8E1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-pagar {
+    background: #005700;
+    color: #E5E8E1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 32px;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+}
