@@ -1,14 +1,13 @@
-// ============================================================
-// 🎬 DULCERÍA CINETECA NACIONAL — script.js
-// ============================================================
 
-// ─── ESTADO GLOBAL ───────────────────────────────────────────
+// 🎬 Dulceria cineteca — script.js
+
+// ─── Estado global
 let seccionActual = "alimentos";
 let audioActivo = true;
 let carrito = [];
 let seleccionModal = {};
 
-// ─── CONFIGURACIÓN ───────────────────────────────────────────
+// ─── Configuracion
 const secciones = {
     alimentos: ["palomitas", "papas", "dulces", "galletas", "chocolates", "cacahuates"],
     bebidas:   ["refrescos", "agua", "jugos", "icee"],
@@ -31,7 +30,7 @@ const instrucciones = {
     familiares:   "Elige tu combo familiar"
 };
 
-// ─── AUDIO ───────────────────────────────────────────────────
+// ─── Audio
 function leerTexto(texto) {
     if (!audioActivo) return;
     window.speechSynthesis.cancel();
@@ -41,13 +40,13 @@ function leerTexto(texto) {
     window.speechSynthesis.speak(msg);
 }
 
-// ─── DOM REFS ────────────────────────────────────────────────
+// ─── DOM REFS 
 const contenedorCategorias = document.getElementById("categorias");
 const textoInstruccion     = document.getElementById("instruccion");
 const grid                 = document.querySelector(".productos");
 const progreso             = document.getElementById("progresoCombos");
 
-// ─── NAVEGACIÓN DE SECCIONES ─────────────────────────────────
+// ─── Navegacion secciones
 document.querySelectorAll(".nav-btn").forEach(boton => {
     boton.addEventListener("click", () => {
         const seccion = boton.dataset.seccion;
@@ -86,7 +85,7 @@ document.querySelectorAll(".nav-btn").forEach(boton => {
     });
 });
 
-// ─── CATEGORÍAS ──────────────────────────────────────────────
+// ─── Categorias
 function activarEventosCategorias() {
     document.querySelectorAll(".cat-btn").forEach(boton => {
         boton.addEventListener("click", () => {
@@ -108,7 +107,7 @@ function filtrarProductos(categoria) {
     });
 }
 
-// ─── CLICKS EN TARJETAS ──────────────────────────────────────
+// ─── Click en tarjetas
 document.addEventListener("click", e => {
 
     if (e.target.closest(".btn-sumar") || e.target.closest(".btn-restar")) {
@@ -153,7 +152,7 @@ document.addEventListener("click", e => {
     }
 });
 
-// ─── MODAL DE CONFIRMACIÓN ───────────────────────────────────
+// ─── Modal de confirmacion
 function abrirModalConfirmacion(datos) {
     const modal = document.getElementById("modal-confirmacion");
     if (!modal) return;
@@ -188,7 +187,7 @@ function abrirModalConfirmacion(datos) {
     };
 }
 
-// ─── MODAL DE TAMAÑOS ────────────────────────────────────────
+// ─── Modal de tamaños
 function abrirModalTamanio(nombre, imgSrc, cat) {
     seleccionModal = {};
     const modal = document.getElementById("modal-palomitas");
@@ -259,7 +258,7 @@ document.getElementById("cancelar")?.addEventListener("click", () => {
     leerTexto("Cancelado");
 });
 
-// ─── CARRITO ─────────────────────────────────────────────────
+// ─── Carrito
 function agregarAlCarrito(id, nombre, variedad, precio, cantidad, img) {
     precio = parseFloat(precio) || 0;
     const key = id + (variedad ? `-${variedad}` : "");
@@ -394,7 +393,7 @@ function mostrarProductos() {
     if (seccionActual !== "combos") contenedorCategorias.style.display = "flex";
 }
 
-// ─── TOAST ───────────────────────────────────────────────────
+// ─── Toast
 function mostrarToast(mensaje) {
     const toast = document.getElementById("toast-notif");
     if (!toast) return;
@@ -404,12 +403,12 @@ function mostrarToast(mensaje) {
     toast._timer = setTimeout(() => toast.classList.remove("visible"), 2500);
 }
 
-// ─── HELPERS ─────────────────────────────────────────────────
+// ─── Helper
 function generarId(nombre) {
     return (nombre || "prod").toLowerCase().replace(/\s+/g, "-") + "-" + Date.now();
 }
 
-// ─── INICIALIZACIÓN ──────────────────────────────────────────
+// ─── Inicializacion
 window.addEventListener("load", () => {
     document.querySelector('.nav-btn[data-seccion="alimentos"]')?.click();
     setTimeout(() => leerTexto("Selecciona una categoría para comenzar"), 800);
