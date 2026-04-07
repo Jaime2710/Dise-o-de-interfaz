@@ -1,5 +1,4 @@
-
-// 🎬 Dulceria cineteca — script.js
+// Dulceria Cineteca Nacional — script.js
 
 // ─── Estado global
 let seccionActual = "alimentos";
@@ -40,7 +39,7 @@ function leerTexto(texto) {
     window.speechSynthesis.speak(msg);
 }
 
-// ─── DOM REFS 
+// ─── DOM Refs
 const contenedorCategorias = document.getElementById("categorias");
 const textoInstruccion     = document.getElementById("instruccion");
 const grid                 = document.querySelector(".productos");
@@ -92,7 +91,7 @@ function activarEventosCategorias() {
             document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
             boton.classList.add("active");
             const cat = boton.dataset.cat;
-            const texto = instrucciones[cat] || "Selecciona una opción";
+            const texto = instrucciones[cat] || "Selecciona una opcion";
             textoInstruccion.textContent = texto;
             leerTexto(texto);
             filtrarProductos(cat);
@@ -107,7 +106,7 @@ function filtrarProductos(categoria) {
     });
 }
 
-// ─── Click en tarjetas
+// ─── Clicks en tarjetas
 document.addEventListener("click", e => {
 
     if (e.target.closest(".btn-sumar") || e.target.closest(".btn-restar")) {
@@ -157,13 +156,13 @@ function abrirModalConfirmacion(datos) {
     const modal = document.getElementById("modal-confirmacion");
     if (!modal) return;
 
-    document.getElementById("conf-img").src              = datos.img;
-    document.getElementById("conf-nombre").textContent   = datos.nombre + (datos.variedad ? ` — ${datos.variedad}` : "");
-    document.getElementById("conf-detalle").textContent  = `Cantidad: ${datos.cantidad}`;
-    document.getElementById("conf-total").textContent    = `Total: $${(datos.cantidad * datos.precio).toFixed(0)}`;
+    document.getElementById("conf-img").src             = datos.img;
+    document.getElementById("conf-nombre").textContent  = datos.nombre + (datos.variedad ? ` - ${datos.variedad}` : "");
+    document.getElementById("conf-detalle").textContent = `Cantidad: ${datos.cantidad}`;
+    document.getElementById("conf-total").textContent   = `Total: $${(datos.cantidad * datos.precio).toFixed(0)}`;
 
     modal.classList.add("visible");
-    leerTexto(`¿Agregar ${datos.cantidad} ${datos.nombre}?`);
+    leerTexto(`Agregar ${datos.cantidad} ${datos.nombre}`);
 
     document.getElementById("conf-agregar").onclick = () => {
         agregarAlCarrito(datos.id, datos.nombre, datos.variedad, datos.precio, datos.cantidad, datos.img);
@@ -172,7 +171,7 @@ function abrirModalConfirmacion(datos) {
             if (span) span.textContent = "0";
         }
         modal.classList.remove("visible");
-        mostrarToast(`✔ ${datos.nombre} agregado al carrito`);
+        mostrarToast(`${datos.nombre} agregado al carrito`);
         actualizarBadgeCarrito();
         leerTexto("Agregado al carrito");
     };
@@ -187,7 +186,7 @@ function abrirModalConfirmacion(datos) {
     };
 }
 
-// ─── Modal de tamaños
+// ─── Modal de tamanios (palomitas, refrescos, icee)
 function abrirModalTamanio(nombre, imgSrc, cat) {
     seleccionModal = {};
     const modal = document.getElementById("modal-palomitas");
@@ -233,8 +232,8 @@ document.getElementById("confirmar")?.addEventListener("click", () => {
     const imgSrc = modal.querySelector(".modal-imagen img")?.src || "";
 
     if (Object.keys(seleccionModal).length === 0) {
-        mostrarToast("Selecciona al menos un tamaño");
-        leerTexto("Selecciona al menos un tamaño");
+        mostrarToast("Selecciona al menos un tamano");
+        leerTexto("Selecciona al menos un tamano");
         return;
     }
 
@@ -247,7 +246,7 @@ document.getElementById("confirmar")?.addEventListener("click", () => {
     }
 
     modal.classList.add("hidden");
-    mostrarToast(`✔ ${nombre} agregado al carrito`);
+    mostrarToast(`${nombre} agregado al carrito`);
     actualizarBadgeCarrito();
     leerTexto("Agregado al carrito");
     seleccionModal = {};
@@ -258,7 +257,7 @@ document.getElementById("cancelar")?.addEventListener("click", () => {
     leerTexto("Cancelado");
 });
 
-// ─── Carrito
+// ─── Motor del carrito
 function agregarAlCarrito(id, nombre, variedad, precio, cantidad, img) {
     precio = parseFloat(precio) || 0;
     const key = id + (variedad ? `-${variedad}` : "");
@@ -277,6 +276,7 @@ function actualizarBadgeCarrito() {
     if (btnCarrito && badge.parentElement !== btnCarrito) btnCarrito.appendChild(badge);
 }
 
+// ─── Vista carrito
 function mostrarCarrito() {
     ocultarProductos();
     const vistaCarrito = document.getElementById("vista-carrito");
@@ -285,17 +285,30 @@ function mostrarCarrito() {
     vistaCarrito.classList.add("visible");
 }
 
+// Productos que usan modal de tamanios — muestran boton Editar en el carrito
+const PRODUCTOS_CON_MODAL = ["palomitas", "refresco", "icee"];
+function tieneModal(item) {
+    return PRODUCTOS_CON_MODAL.some(p => item.id.toLowerCase().includes(p));
+}
+
 function renderizarCarrito(contenedor) {
     const totalGeneral = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
 
-    let html = `<p class="carrito-instruccion">Presiona "Editar" para hacer cambios en tu pedido o presiona pagar para continuar</p>`;
+    let html = "";
 
     if (carrito.length === 0) {
-        html += `<div class="carrito-vacio">Tu carrito está vacío 🛒</div>`;
+        html += `
+        <div class="carrito-vacio">
+            <p class="carrito-vacio-titulo">Tu carrito esta vacio</p>
+            <p class="carrito-vacio-subtitulo">Agrega alimentos, bebidas o tus combos para completar tu pedido y pagar</p>
+        </div>`;
     } else {
+        html += `<p class="carrito-instruccion">Presiona "Editar" para hacer cambios en tu pedido o presiona pagar para continuar</p>`;
         html += `<div class="carrito-lista">`;
+
         carrito.forEach((item, idx) => {
             const subtotal = (item.precio * item.cantidad).toFixed(0);
+            const conModal = tieneModal(item);
             html += `
             <div class="carrito-item" data-idx="${idx}">
                 <img src="${item.img}" alt="${item.nombre}" onerror="this.src=''">
@@ -303,26 +316,29 @@ function renderizarCarrito(contenedor) {
                     <span class="carrito-nombre">${item.nombre}</span>
                     ${item.variedad ? `<span class="carrito-variedad">${item.variedad}</span>` : ""}
                 </div>
+                <span class="ci-total">Total: &nbsp; $ ${subtotal}</span>
                 <div class="carrito-controles">
-                    <button class="ci-eliminar" data-idx="${idx}">✖ Eliminar</button>
+                    <button class="ci-eliminar" data-idx="${idx}">
+                        <img src="Botones/Positivo/Cancelar.png" width="17">  Eliminar </button>
                     <div class="ci-cant-wrap">
-                        <button class="ci-btn ci-menos" data-idx="${idx}">−</button>
+                        <button class="ci-btn ci-menos" data-idx="${idx}"> <img src="Botones/Positivo/Menos.png" width="17" onerror="this.style.display='none'"></button>
                         <span class="ci-cantidad">${item.cantidad}</span>
-                        <button class="ci-btn ci-mas" data-idx="${idx}">+</button>
+                        <button class="ci-btn ci-mas" data-idx="${idx}"> <img src="Botones/Positivo/Mas.png" width="17" onerror="this.style.display='none'"></button>
                     </div>
-                    <span class="ci-total">Total&nbsp;$${subtotal}</span>
+                    ${conModal ? `<button class="ci-editar" data-idx="${idx}"> <img src="Botones/Positivo/Editar.png" width="17" onerror="this.style.display='none'"> Editar</button>` : ""}
                 </div>
             </div>`;
         });
+
         html += `</div>`;
     }
 
     html += `
-        <div class="carrito-footer">
-            <button class="btn-vaciar" id="btn-vaciar-carrito">🗑 Vaciar</button>
-            <span class="carrito-total-label">Total: $${totalGeneral.toFixed(0)}</span>
-            <button class="btn-pagar" id="btn-pagar">Pagar</button>
-        </div>`;
+    <div class="carrito-footer">
+        <button class="btn-vaciar" id="btn-vaciar-carrito"> <img src="Botones/Positivo/Vaciar.png" width="17"> Vaciar</button>
+        <span class="carrito-total-label">Total: $${totalGeneral.toFixed(0)}</span>
+        <button class="btn-pagar" id="btn-pagar">Pagar</button>
+    </div>`;
 
     contenedor.innerHTML = html;
 
@@ -355,6 +371,20 @@ function renderizarCarrito(contenedor) {
         });
     });
 
+    contenedor.querySelectorAll(".ci-editar").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const idx  = parseInt(btn.dataset.idx);
+            const item = carrito[idx];
+            carrito.splice(idx, 1);
+            actualizarBadgeCarrito();
+            ocultarCarrito();
+            let cat = "palomitas";
+            if (item.id.includes("refresco")) cat = "refrescos";
+            else if (item.id.includes("icee"))    cat = "icee";
+            abrirModalTamanio(item.nombre, item.img, cat);
+        });
+    });
+
     document.getElementById("btn-vaciar-carrito")?.addEventListener("click", () => {
         if (carrito.length === 0) return;
         carrito = [];
@@ -366,12 +396,12 @@ function renderizarCarrito(contenedor) {
 
     document.getElementById("btn-pagar")?.addEventListener("click", () => {
         if (carrito.length === 0) {
-            mostrarToast("Tu carrito está vacío");
-            leerTexto("Tu carrito está vacío");
+            mostrarToast("Tu carrito esta vacio");
+            leerTexto("Tu carrito esta vacio");
             return;
         }
         leerTexto("Procediendo al pago");
-        mostrarToast("🎬 Procediendo al pago…");
+        mostrarToast("Procediendo al pago");
     });
 }
 
@@ -411,5 +441,6 @@ function generarId(nombre) {
 // ─── Inicializacion
 window.addEventListener("load", () => {
     document.querySelector('.nav-btn[data-seccion="alimentos"]')?.click();
-    setTimeout(() => leerTexto("Selecciona una categoría para comenzar"), 800);
+    setTimeout(() => leerTexto("Selecciona una categoria para comenzar"), 800);
 });
+
