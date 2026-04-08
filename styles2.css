@@ -3,26 +3,26 @@ margin:0px;
 padding:0;
 box-sizing:border-box;
 }
- 
+
 body{
 margin:0;
 font-family:"Noto Sans", sans-serif;
 background:#E5E8E1;
 }
- 
+
 /* Header full */
- 
+
 .header{
- 
+
 width:100%;
 height:80px;
 position: relative;
 background-color:#1F3A44;
 z-index: 1000;
 }
- 
+
 .header-content{
- 
+
 width:1024px;
 padding:0 80px;
 padding-top: 8px;
@@ -31,30 +31,30 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 columns: 4;
- 
+
 }
- 
+
 /* Logos */
- 
- 
- 
+
+
+
 /* Contenedor principal */
- 
+
 .container{
- 
+
 width:1024px;
 margin:auto;
- 
+
 padding:0 80px;
- 
+
 display:flex;
 flex-direction:column;
- 
+
 }
- 
- 
+
+
 /* NAV Seccciones */
- 
+
 .nav-secciones{
 width:100%;
 height:55px;
@@ -69,7 +69,7 @@ gap:83px;
     margin-bottom: 5px;
 }
 .nav-btn{
- 
+
 height:55px;
 width: 154px;
 font-size: 25px;
@@ -83,26 +83,26 @@ justify-content: center;
 gap: 14px;
 padding: 15px 25px;
 background-color: #1F3A44;
- 
+
 }
- 
+
 .pictos{
     color: #E5E8E1;
     width: 20px;
 }
- 
+
 /* Barra de categorías */
- 
+
 .categorias{
 display:flex;
 gap:14px;
 margin-bottom:45px;
 }
- 
+
 .cat-btn{
- 
+
 font-size:20px;
- 
+
 border:none;
 border-radius:12px;
 padding:12px 24px;
@@ -116,36 +116,36 @@ font-weight: 400;
     color:#E5E8E1;
     box-shadow:none;
 }
- 
+
 .cat-btn.active{
- 
+
 background-color:#6E2C1E;
 color:#E5E8E1;
 box-shadow:none;
 font-weight: 600;
 }
- 
+
 /*Instrucciones */
 .Instruccion{
 font-size: 25px;  
 font-weight: 600;
 margin-bottom: 48px;
 }
- 
+
 /* Grid de productos */
- 
+
 .productos{
 display:grid;
 grid-template-columns:repeat(4, 1fr); 
 gap:24px;
 justify-items:center;
 }
- 
- 
+
+
 /* Tarjeta de productos */
- 
+
 .producto{
- 
+
 width:198px;
 height:352px;
 background:#E5E8E1;
@@ -154,72 +154,72 @@ padding:24px;
 padding-bottom:16px;
 box-shadow:1px 1px 5px 1px rgba(0,0,0,0.25);
 display:none;
- 
- 
+
+
 flex-direction:column;
 align-items:center;
 justify-content:space-between;
 text-align:center;
 gap:5px;
- 
+
 transition: transform 0.2s ease, opacity 0.2s ease;
- 
+
 }
- 
- 
+
+
 .producto.activo {
 display: flex;
- 
- 
+
+
 }
- 
+
 /* Img producto */
- 
+
 .producto-img{
- 
+
 width:120px;
 height:120px;
- 
- 
- 
- 
+
+
+
+
 display:flex;
 justify-content:center;
 align-items:center;
- 
+
 }
- 
+
 /* Texto producto */
- 
+
 .producto-nombre{
- 
+
 font-size:25px;
 font-weight:600;
 text-align:center;
 margin:0px;
 }
- 
- 
+
+
 /* Boton */
- 
+
 .btn-seleccionar{
- 
+
 font-size:20px;
 padding:12px 24px;
 height:51px;
 font-weight: 600;
- 
+
 border:none;
 border-radius:12px;
- 
+
 background:#6E2C1E;
 color:#E5E8E1;
- 
+
 cursor:pointer;
 display:flex;
 justify-content:center;
 align-items:center;
- 
+
 }
 .btn-agregar {
 font-size:20px;
@@ -232,22 +232,22 @@ color:#E5E8E1;
 cursor:pointer; 
 font-weight: 600;
 }
- 
+
 /* Precio */
 .producto-precio{
     font-size:20px;
     margin:0px;
 }
- 
+
 /* Contador */
 .contador{
     display:flex;
     align-items:center;
     justify-content:center;
     gap:12px;
- 
+
 }
- 
+
 /* Botones + - */
 .btn-sumar,
 .btn-restar{
@@ -263,7 +263,7 @@ font-weight: 600;
     display: flex;
     justify-content: center;
 }
- 
+
 /* Cantidad */
 .cantidad{
     font-size:25px;
@@ -271,7 +271,7 @@ font-weight: 600;
     width:20px;
     text-align:center;
 }
- 
+
 .scroll-float{
     position: fixed;
     bottom: 20px;
@@ -284,25 +284,25 @@ font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
- 
+
     cursor: pointer;
- 
+
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
 }
- 
+
 /* visible */
 .scroll-float.show{
     opacity: 1;
     pointer-events: auto;
 }
- 
+
 /* efecto click */
 .scroll-float:active{
     transform: translateX(-50%) scale(0.9);
 }
- 
+
 /* Progreso */
 .progreso-combos{
 display:none; 
@@ -311,12 +311,12 @@ justify-content:space-between;
 gap:33px;
 margin-bottom:40px;
 }
- 
+
 .paso{
 text-align:center;
 font-size:20px;
 }
- 
+
 .paso span{
 display:inline-block;
 width:32px;
@@ -328,26 +328,26 @@ color:#1F3A44;
 line-height:32px;
 align-items: center;
 }
- 
+
 .paso.activo span{
 background:#6E2C1E;
 }
- 
+
 .linea{
 width:60px;
 height:3px;
 background:#1F3A44;
 }
- 
+
 /* Grid combos */
 .productos.combos{
- 
+
 display:grid;
 grid-template-columns:repeat(4, 1fr); 
 gap:24px;
 justify-items:center;
 }
- 
+
 /* Tarjeta combo */
 .combo-card{
 width:198px;
@@ -359,21 +359,21 @@ display:none;
 flex-direction:column;
 align-items:center;
 text-align:center;
- 
+
 gap:12px;
 padding:19px;
 padding-bottom:16px;
 }
- 
+
 .combo-card.activo {
 display:flex;
 }
- 
+
 .combo-img{
 width:120px;
 }
- 
- 
+
+
 .btn-combo{
 background:#6E2C1E;
 color:white;
@@ -383,7 +383,7 @@ border-radius:12px;
 cursor:pointer;
 font-size: 20px;
 }
- 
+
 .combo-precio{
 font-size:20px ;
 font-weight:400 ;
@@ -391,18 +391,18 @@ display:flex;
 align-items:center;
 justify-content:center;
 gap:20px;
- 
+
 }
 .producto.descripcion{
 font-size: 16px ;
 font-weight:300 ;
 justify-content: center;
 }
- 
- 
- 
+
+
+
 /* Fondo del modal */
- 
+
 .modal {
     position: fixed;
     top: 80px; 
@@ -414,11 +414,11 @@ justify-content: center;
     border-bottom: 2px solid #1F3A44;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
- 
+
 .hidden {
     display: none !important;
 }
- 
+
 /* El contenedor principal*/
 .modal-content {
     width: 1024px; 
@@ -438,23 +438,13 @@ justify-content: center;
     display: flex;
     flex-direction: column;
 }
-.fila-opcion {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1.5fr; 
-    align-items: center;
-    padding: 15px 0;
-    width: 100%;
-    font-size: 20px;
-    font-weight: 600;
-    color: #2E2E2E;
-    gap:40px;
-}
- 
+
+
 /* Clase para ocultar suavemente */
 .hidden {
     display: none !important;
 }
- 
+
 .modal-producto{
     font-size: 25px;
     font-weight: 600;
@@ -467,7 +457,7 @@ justify-content: center;
     color:#2E2E2E;
     margin-bottom: 58PX;
 }
- 
+
 .modal-imagen {
     width: 180px; 
     flex-shrink: 0; 
@@ -475,7 +465,7 @@ justify-content: center;
     justify-content: center;
     align-items: center;
 }
- 
+
 .modal-imagen img {
     width: 100%; 
     height: auto; 
@@ -488,9 +478,9 @@ justify-content: center;
     gap: 45px;
 }
 /* Controles de + y - */
-.mas, .menos {
-    background: #1F3A44;
-    color: #E5E8E1;
+.mas, .menos, .fr-mas, .fr-menos {
+    background: #6E2C1E;
+   
     border: none;
     border-radius: 12px;
     width: 45px;
@@ -500,9 +490,9 @@ justify-content: center;
     align-items: center;
     justify-content: center;
 }
- 
- 
- 
+
+
+
 .cantidad {  
     text-align: center;
     font-size: 25px;
@@ -510,43 +500,45 @@ justify-content: center;
     min-width: 30px;
     text-align: center;
 }
- 
+
 /* Footer de botones */
 .modal-footer {
     display: flex;
     justify-content: space-between;
-    
+    width: 100%;
 }
- 
+
 .cancelar {
     background: #B32821; 
     color: #E5E8E1;
     border: none;
     border-radius: 12px;
     padding: 12px 24px;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 400;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
+    width:154px;
 }
- 
+
 .confirmar {
     background: #005700; 
     color: #E5E8E1;
     border: none;
     border-radius: 12px;
     padding: 12px 24px;
-    font-size: 25px;
+    width: 154px;
+    font-size: 20px;
     font-weight: 400;
     cursor: pointer;
 }
- 
- 
+
+
 /* Modal de confirmacion                                        */
- 
- 
+
+
 #modal-confirmacion {
     position: fixed;
     inset: 0;
@@ -555,67 +547,68 @@ justify-content: center;
     align-items: center;
     justify-content: center;
 }
- 
+
 #modal-confirmacion.visible {
     display: flex;
 }
- 
+
 .modal-conf-overlay {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.45);
 }
- 
+
 .modal-conf-box {
     position: relative;
+    z-index: 1;
     background: #E5E8E1;
     border-radius: 16px;
-    padding: 15px;
+    padding: 32px;
     width: 480px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
- 
+
 .modal-conf-body {
     display: flex;
     align-items: center;
     gap: 24px;
 }
- 
+
 .modal-conf-texto {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
- 
+
 .modal-conf-footer {
     display: flex;
     justify-content: space-between;
     gap: 16px;
 }
- 
+
 #conf-nombre {
     font-size: 22px;
     font-weight: 700;
     color: #1F3A44;
     margin: 0;
 }
- 
+
 #conf-detalle {
     font-size: 18px;
     color: #444;
     margin: 0;
 }
- 
+
 #conf-total {
     font-size: 20px;
     font-weight: 700;
     color: #6E2C1E;
     margin: 0;
 }
- 
+
 #modal-confirmacion .confirmar {
     background: #005700;
     color: #E5E8E1;
@@ -625,9 +618,9 @@ justify-content: center;
     font-size: 20px;
     font-weight: 600;
     cursor: pointer;
-    
+   
 }
- 
+
 #modal-confirmacion .cancelar {
     background: #B32821;
     color: #E5E8E1;
@@ -639,10 +632,8 @@ justify-content: center;
     cursor: pointer;
    
 }
- 
-/* BADGE DEL CARRITO (nav)                                      */
- 
- 
+                                
+
 #carrito-badge {
     background: #6E2C1E;
     color: #E5E8E1;
@@ -657,15 +648,15 @@ justify-content: center;
     margin-left: 6px;
     vertical-align: middle;
 }
- 
+
 #carrito-badge.visible {
     display: inline-flex;
 }
- 
- 
+
+
 /* TOAST DE NOTIFICACIÓN                                        */
- 
- 
+
+
 #toast-notif {
     position: fixed;
     bottom: 32px;
@@ -684,32 +675,34 @@ justify-content: center;
     pointer-events: none;
     white-space: nowrap;
 }
- 
+
 #toast-notif.visible {
     opacity: 1;
 }
- 
- 
+
+
 /* ── Vista del carrito ── */
- 
+
 #vista-carrito {
     display: none;
+    width: 1024px;
+    margin: 0 auto;
+    padding: 0 80px;
+    box-sizing: border-box;
 }
- 
+
 #vista-carrito.visible {
     display: block;
 }
- 
+
 /* Instrucción superior */
 .carrito-instruccion {
     font-size: 25px;
     font-weight: 600;
     margin-bottom: 32px;
     color: #2E2E2E;
-    margin-left: 80px;
-    margin-right: 80px;
 }
- 
+
 /* Carrito vacío */
 .carrito-vacio {
     display: flex;
@@ -720,13 +713,13 @@ justify-content: center;
     padding: 80px 0;
     text-align: center;
 }
- 
+
 .carrito-vacio-titulo {
     font-size: 25px;
     font-weight: 700;
     color: #1F3A44;
 }
- 
+
 .carrito-vacio-subtitulo {
     font-size: 20px;
     font-weight: 400;
@@ -734,25 +727,23 @@ justify-content: center;
     max-width: 480px;
     line-height: 1.5;
 }
- 
+
 /* Lista de ítems */
 .carrito-lista {
     display: flex;
     flex-direction: column;
     gap: 16px;
     margin-bottom: 40px;
-    margin: 80px;
 }
- 
-/* Tarjeta:
-   [ img ]  nombre + variedad          Total $XX
-   [ img ]  Eliminar  − cant +  Editar
-*/
+
+/* Tarjeta*/
 .carrito-item {
     background: #E5E8E1;
     border-radius: 12px;
-    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.15);
+    box-shadow: 1px 1px 8px 2px rgba(0,0,0,0.12);
     display: grid;
+    width:864px;
+    height:208px;
     grid-template-columns: 110px 1fr auto;
     grid-template-rows: auto auto;
     align-items: center;
@@ -760,18 +751,18 @@ justify-content: center;
     row-gap: 16px;
     padding: 20px 24px;
 }
- 
-/* Imagen — ocupa las 2 filas */
+
+
 .carrito-item > img {
     grid-column: 1;
     grid-row: 1 / 3;
     width: 90px;
     height: 90px;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 12px;
 }
- 
-/* Nombre + variedad — fila 1, col 2 */
+
+/* Nombre + variedad */
 .carrito-info {
     grid-column: 2;
     grid-row: 1;
@@ -779,20 +770,20 @@ justify-content: center;
     flex-direction: column;
     gap: 4px;
 }
- 
+
 .carrito-nombre {
     font-size: 22px;
     font-weight: 700;
     color: #1F3A44;
 }
- 
+
 .carrito-variedad {
     font-size: 18px;
     font-weight: 400;
     color: #555;
 }
- 
-/* Total — fila 1, col 3 */
+
+/* Total  */
 .ci-total {
     grid-column: 3;
     grid-row: 1;
@@ -802,15 +793,18 @@ justify-content: center;
     white-space: nowrap;
     text-align: right;
 }
- 
-/* Controles — fila 2, col 2 y 3 */
+
+/* Controles*/
 .carrito-controles {
-    justify-content: space-between;
+    grid-column: 2 / 4;
+    grid-row: 2;
+    gap:67px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    justify-content: space-between;
+    
 }
- 
+
 /* Botón Eliminar */
 .ci-eliminar {
     background: #B32821;
@@ -826,39 +820,41 @@ justify-content: center;
     gap: 8px;
     white-space: nowrap;
 }
- 
+
 /* Contador − cant + */
 .ci-cant-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
- 
-.ci-btn {
-    width: 46px;
-    height: 24px;
-    border: none;
-    border-radius: 12px;
-    background: #6E2C1E;
+    color: #2E2E2E;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    gap:24px;
 }
- 
+
+
 .ci-cantidad {
     font-size: 25px;
     font-weight: 700;
     min-width: 28px;
     text-align: center;
-    color: #1F3A44;
+    color: #2E2E2E;
 }
- 
+.ci-btn {
+    width: 46px;
+    height: 26px;
+    border-radius: 12px;
+    
+    background: #6E2C1E;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
 /* Botón Editar — solo en productos con modal */
 .ci-editar {
-    margin-left: auto;
-    background: #1F3A44;
+    background: #6E2C1E;
     color: #E5E8E1;
     border: none;
     border-radius: 12px;
@@ -868,10 +864,9 @@ justify-content: center;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
-    white-space: nowrap;
+
 }
- 
+
 /* Footer */
 .carrito-footer {
     display: flex;
@@ -879,16 +874,14 @@ justify-content: center;
     align-items: center;
     padding: 24px 0;
     margin-top: 8px;
-    margin: 80px;
-    
 }
- 
+
 .carrito-total-label {
     font-size: 25px;
     font-weight: 700;
-    color: #2E2E2E;
+    color: #1F3A44;
 }
- 
+
 /* Botón Vaciar */
 .btn-vaciar {
     background: #6E2C1E;
@@ -903,7 +896,7 @@ justify-content: center;
     align-items: center;
     gap: 10px;
 }
- 
+
 /* Botón Pagar */
 .btn-pagar {
     background: #6E2C1E;
@@ -915,3 +908,147 @@ justify-content: center;
     font-weight: 700;
     cursor: pointer;
 }
+
+.fila-opcion {
+    display: grid;
+    grid-template-columns: 2fr 80px 1fr;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    gap: 24px;
+}
+
+.fila-opcion:last-child {
+    border-bottom: none;
+}
+
+.fp-nombre {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2E2E2E;
+}
+
+.fp-oz {
+    font-size: 16px;
+    font-weight: 400;
+    color: #666;
+    margin-left: 8px;
+}
+
+.fp-precio {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2E2E2E;
+}
+
+.fila-opcion .modal-contador {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+/* Modal refrescos */
+
+
+/* Fila de opción de refresco*/
+.fila-refresco{
+    display: grid;
+    grid-template-columns: 2fr 80px 160px 1fr;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    gap: 24px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2E2E2E;
+}
+
+.fila-refresco:last-child {
+    border-bottom: none;
+}
+
+.fr-nombre {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2E2E2E;
+}
+
+.fr-precio {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2E2E2E;
+}
+
+/* Placeholder vacío*/
+.fr-hielo-placeholder {
+    display: block;
+}
+
+/*Switch de hielo */
+.switch-hielo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.switch-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1F3A44;
+}
+
+.switch-track {
+    position: relative;
+    width: 56px;
+    height: 28px;
+}
+
+.fr-hielo-check {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.switch-thumb {
+    position: absolute;
+    inset: 0;
+    background: #ccc;
+    border-radius: 28px;
+    transition: background 0.25s ease;
+    cursor: pointer;
+}
+
+.switch-thumb::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.25s ease;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.fr-hielo-check:checked + .switch-thumb {
+    background: #1F3A44;
+}
+
+.fr-hielo-check:checked + .switch-thumb::before {
+    transform: translateX(28px);
+}
+
+
+.fila-refresco .modal-contador {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+}
+

@@ -186,8 +186,17 @@ function abrirModalConfirmacion(datos) {
     };
 }
 
-// ─── Modal de tamanios (palomitas, refrescos, icee)
+// ─── Modal de tamanios — enruta al modal correcto según categoría
 function abrirModalTamanio(nombre, imgSrc, cat) {
+    if (cat === "refrescos") {
+        abrirModalRefrescos(nombre, imgSrc);
+    } else {
+        abrirModalPalomitas(nombre, imgSrc);
+    }
+}
+
+// ─── Modal Palomitas
+function abrirModalPalomitas(nombre, imgSrc) {
     seleccionModal = {};
     const modal = document.getElementById("modal-palomitas");
     if (!modal) return;
@@ -201,6 +210,101 @@ function abrirModalTamanio(nombre, imgSrc, cat) {
     modal.classList.remove("hidden");
     leerTexto(`Personaliza tu ${nombre}`);
 }
+
+// ─── Modal Refrescos
+let seleccionRefrescos = {};
+
+function abrirModalRefrescos(nombre, imgSrc) {
+    seleccionRefrescos = {};
+    const modal = document.getElementById("modal-refrescos");
+    if (!modal) return;
+
+    // Actualizar nombre e imagen
+    document.getElementById("refresco-nombre").textContent = nombre;
+    document.getElementById("refresco-img").src = imgSrc;
+
+    // Resetear cantidades y switches
+    modal.querySelectorAll(".fr-cantidad").forEach(s => s.textContent = "0");
+    modal.querySelectorAll(".fr-hielo-check").forEach(c => c.checked = true);
+
+    modal.classList.remove("hidden");
+    leerTexto(`Personaliza tu ${nombre}`);
+}
+
+// Eventos de filas del modal de refrescos
+document.querySelectorAll(".fila-refresco").forEach(fila => {
+    const size       = fila.dataset.size;
+    const precio     = parseFloat(fila.dataset.precio) || 0;
+    const tieneHielo = fila.dataset.hielo === "true";
+    const cantSpan   = fila.querySelector(".fr-cantidad");
+    const hielo      = fila.querySelector(".fr-hielo-check");
+
+    fila.querySelector(".fr-mas")?.addEventListener("click", () => {
+        let cant = parseInt(cantSpan.textContent) + 1;
+        cantSpan.textContent = cant;
+        const conHielo = tieneHielo ? hielo?.checked : null;
+        seleccionRefrescos[size] = { cantidad: cant, precio, conHielo };
+        leerTexto(`${size} ${cant}`);
+    });
+
+    fila.querySelector(".fr-menos")?.addEventListener("click", () => {
+        let cant = parseInt(cantSpan.textContent);
+        if (cant > 0) {
+            cant--;
+            cantSpan.textContent = cant;
+            if (cant === 0) delete seleccionRefrescos[size];
+            else {
+                const conHielo = tieneHielo ? hielo?.checked : null;
+                seleccionRefrescos[size] = { cantidad: cant, precio, conHielo };
+            }
+            leerTexto(`${size} ${cant}`);
+        }
+    });
+
+    // Actualizar estado de hielo en selección al cambiar el switch
+    hielo?.addEventListener("change", () => {
+        if (seleccionRefrescos[size]) {
+            seleccionRefrescos[size].conHielo = hielo.checked;
+        }
+    });
+});
+
+// Confirmar modal refrescos
+document.getElementById("confirmar-refresco")?.addEventListener("click", () => {
+    const modal  = document.getElementById("modal-refrescos");
+    const nombre = document.getElementById("refresco-nombre")?.textContent || "Refresco";
+    const imgSrc = document.getElementById("refresco-img")?.src || "";
+
+    if (Object.keys(seleccionRefrescos).length === 0) {
+        mostrarToast("Selecciona al menos un tamano");
+        leerTexto("Selecciona al menos un tamano");
+        return;
+    }
+
+    for (const size in seleccionRefrescos) {
+        const { cantidad, precio, conHielo } = seleccionRefrescos[size];
+        // Variedad incluye hielo si aplica
+        const variedad = conHielo === true  ? `${size} con hielo`
+                       : conHielo === false ? `${size} sin hielo`
+                       : size;
+        agregarAlCarrito(
+            `refresco-${nombre}-${size}`.replace(/\s+/g, "-").toLowerCase(),
+            nombre, variedad, precio, cantidad, imgSrc
+        );
+    }
+
+    modal.classList.add("hidden");
+    mostrarToast(`${nombre} agregado al carrito`);
+    actualizarBadgeCarrito();
+    leerTexto("Agregado al carrito");
+    seleccionRefrescos = {};
+});
+
+// Cancelar modal refrescos
+document.getElementById("cancelar-refresco")?.addEventListener("click", () => {
+    document.getElementById("modal-refrescos")?.classList.add("hidden");
+    leerTexto("Cancelado");
+});
 
 document.querySelectorAll(".fila-opcion").forEach(fila => {
     const size         = fila.dataset.size;
@@ -316,16 +420,17 @@ function renderizarCarrito(contenedor) {
                     <span class="carrito-nombre">${item.nombre}</span>
                     ${item.variedad ? `<span class="carrito-variedad">${item.variedad}</span>` : ""}
                 </div>
-                <span class="ci-total">Total: &nbsp; $ ${subtotal}</span>
+                <span class="ci-total">Total &nbsp; $ ${subtotal}</span>
                 <div class="carrito-controles">
                     <button class="ci-eliminar" data-idx="${idx}">
-                        <img src="Botones/Positivo/Cancelar.png" width="17">  Eliminar </button>
+                        <img src="Botones/Positivo/Cancelar.png" width="17" onerror="this.style.display='none'"> Eliminar
+                    </button>
                     <div class="ci-cant-wrap">
-                        <button class="ci-btn ci-menos" data-idx="${idx}"> <img src="Botones/Positivo/Menos.png" width="17" onerror="this.style.display='none'"></button>
+                        <button class="ci-btn ci-menos" data-idx="${idx}"> <img src="Botones/Positivo/Menos.png" width="17" onerror="this.style.display='none'"> </button>
                         <span class="ci-cantidad">${item.cantidad}</span>
-                        <button class="ci-btn ci-mas" data-idx="${idx}"> <img src="Botones/Positivo/Mas.png" width="17" onerror="this.style.display='none'"></button>
+                        <button class="ci-btn ci-mas" data-idx="${idx}">  <img src="Botones/Positivo/Mas.png" width="17" onerror="this.style.display='none'"> </button>
                     </div>
-                    ${conModal ? `<button class="ci-editar" data-idx="${idx}"> <img src="Botones/Positivo/Editar.png" width="17" onerror="this.style.display='none'"> Editar</button>` : ""}
+                    ${conModal ? `<button class="ci-editar" data-idx="${idx}"> <img src="Botones/Positivo/Editar.png" width="31" onerror="this.style.display='none'"> Editar</button>` : ""}
                 </div>
             </div>`;
         });
@@ -335,7 +440,7 @@ function renderizarCarrito(contenedor) {
 
     html += `
     <div class="carrito-footer">
-        <button class="btn-vaciar" id="btn-vaciar-carrito"> <img src="Botones/Positivo/Vaciar.png" width="17"> Vaciar</button>
+        <button class="btn-vaciar" id="btn-vaciar-carrito"> <img src="Botones/Positivo/Vaciar.png" width="17" onerror="this.style.display='none'"> Vaciar</button>
         <span class="carrito-total-label">Total: $${totalGeneral.toFixed(0)}</span>
         <button class="btn-pagar" id="btn-pagar">Pagar</button>
     </div>`;

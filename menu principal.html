@@ -715,7 +715,8 @@
 
     <button class="btn-combo">Modificar</button>
 </div>
-<!--Modal-->
+
+<!--Modal Palomitas-->
 <div id="modal-palomitas" class="modal hidden">
     <div class="modal-content">
         
@@ -728,9 +729,9 @@
                 <p class="modal-producto">Palomitas Mantequilla</p>
                 <p class="modal-subtitulo">Selecciona el tamaño de tus palomitas</p>
 
-                <div class="fila-opcion" data-size="chico" data-precio="62">
-                    <span> Pequeñas 45 oz </span>
-                    <span>$62</span>
+                <div class="fila-opcion" data-size="Palomitas pequeñas" data-precio="62">
+                    <span class="fp-nombre">Palomitas pequeñas <span class="fp-oz">45 oz</span></span>
+                    <span class="fp-precio">$62</span>
                     <div class="modal-contador">
                         <button class="menos"><img src="Botones/Positivo/Menos.png" width="20"></button>
                         <span class="cantidad">0</span>
@@ -738,9 +739,9 @@
                     </div>
                 </div>
 
-                <div class="fila-opcion" data-size="mediano" data-precio="87">
-                    <span>Medianas 85 oz</span>
-                    <span>$87</span>
+                <div class="fila-opcion" data-size="Palomitas medianas" data-precio="87">
+                    <span class="fp-nombre">Palomitas medianas <span class="fp-oz">85 oz</span></span>
+                    <span class="fp-precio">$87</span>
                     <div class="modal-contador">
                         <button class="menos"><img src="Botones/Positivo/Menos.png" width="20"></button>
                         <span class="cantidad">0</span>
@@ -748,9 +749,9 @@
                     </div>
                 </div>
 
-                <div class="fila-opcion" data-size="grande" data-precio="99">
-                    <span>Grandes 130 oz</span>
-                    <span>$99</span>
+                <div class="fila-opcion" data-size="Palomitas grandes" data-precio="99">
+                    <span class="fp-nombre">Palomitas grandes <span class="fp-oz">130 oz</span></span>
+                    <span class="fp-precio">$99</span>
                     <div class="modal-contador">
                         <button class="menos"><img src="Botones/Positivo/Menos.png" width="20"></button>
                         <span class="cantidad">0</span>
@@ -768,6 +769,80 @@
         </div>
     </div>
 </div>
+
+<!--Modal Refrescos-->
+<div id="modal-refrescos" class="modal hidden">
+    <div class="modal-content">
+
+        <div class="modal-layout">
+            <div class="modal-imagen">
+                <img id="refresco-img" src="" alt="Refresco">
+            </div>
+
+            <div class="modal-opciones-lista">
+                <p class="modal-producto" id="refresco-nombre">Refresco</p>
+                <p class="modal-subtitulo">Selecciona el tamaño de tu bebida</p>
+
+                <!-- Lata 600ml — solo cantidad, sin hielo -->
+                <div class="fila-refresco" data-size="Lata 600 ml" data-precio="20" data-hielo="false">
+                    <span class="fr-nombre">Lata 600 ml</span>
+                    <span class="fr-precio">$20</span>
+                    <span class="fr-hielo-placeholder"></span>
+                    <div class="modal-contador">
+                        <button class="fr-menos"><img src="Botones/Positivo/Menos.png" width="20"></button>
+                        <span class="fr-cantidad">0</span>
+                        <button class="fr-mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
+                    </div>
+                </div>
+
+                <!-- Vaso mediano — con switch de hielo -->
+                <div class="fila-refresco" data-size="Vaso mediano" data-precio="39" data-hielo="true">
+                    <span class="fr-nombre">Vaso mediano</span>
+                    <span class="fr-precio">$39</span>
+                    <label class="switch-hielo">
+                        <span class="switch-label">Hielo</span>
+                        <div class="switch-track">
+                            <input type="checkbox" class="fr-hielo-check" checked>
+                            <span class="switch-thumb"></span>
+                        </div>
+                    </label>
+                    <div class="modal-contador">
+                        <button class="fr-menos"><img src="Botones/Positivo/Menos.png" width="20"></button>
+                        <span class="fr-cantidad">0</span>
+                        <button class="fr-mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
+                    </div>
+                </div>
+
+                <!-- Vaso grande — con switch de hielo -->
+                <div class="fila-refresco" data-size="Vaso grande" data-precio="50" data-hielo="true">
+                    <span class="fr-nombre">Vaso grande</span>
+                    <span class="fr-precio">$50</span>
+                    <label class="switch-hielo">
+                        <span class="switch-label">Hielo</span>
+                        <div class="switch-track">
+                            <input type="checkbox" class="fr-hielo-check" checked>
+                            <span class="switch-thumb"></span>
+                        </div>
+                    </label>
+                    <div class="modal-contador">
+                        <button class="fr-menos"><img src="Botones/Positivo/Menos.png" width="20"></button>
+                        <span class="fr-cantidad">0</span>
+                        <button class="fr-mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="cancelar" id="cancelar-refresco">
+                <img src="Botones/Positivo/Cancelar.png" width="16px"> Cancelar
+            </button>
+            <button class="confirmar" id="confirmar-refresco">Agregar</button>
+        </div>
+    </div>
+</div>
+
 </div>
     <!-- ── Vista del carrito ── -->
     <div id="vista-carrito"></div>
