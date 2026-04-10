@@ -1080,7 +1080,23 @@ function cerrarModalActivo() {
  
 // ─── Listener principal del teclado Makey Makey
 document.addEventListener("keydown", function(e) {
- 
+    // ── HOME (flecha arriba) → ir al primer botón
+if (e.key === "Home") {
+    e.preventDefault();
+    const items = obtenerBotonesVisibles();
+    if (items.length === 0) return;
+    items[0].focus();
+    leerTexto(items[0].textContent.trim() || "botón");
+}
+
+// ── END (botón click) → ir al último botón
+if (e.key === "End") {
+    e.preventDefault();
+    const items = obtenerBotonesVisibles();
+    if (items.length === 0) return;
+    items[items.length - 1].focus();
+    leerTexto(items[items.length - 1].textContent.trim() || "botón");
+}
     // ── TAB (flecha derecha) → siguiente botón
     if (e.key === "Tab" && !e.shiftKey) {
         e.preventDefault();
