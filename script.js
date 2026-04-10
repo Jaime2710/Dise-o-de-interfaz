@@ -998,3 +998,152 @@ document.addEventListener("click", e => {
     if (!btn) return;
     if (btn.dataset.combo === "1") abrirCombo1();
 });
+
+
+// ─── NAVEGACIÓN MAKEY MAKEY
+//
+//  Pad →  Derecha   (KEY_TAB)           → siguiente botón
+//  Pad ←  Izquierda (KEY_LEFT_SHIFT)    → botón anterior
+//         Enter     (KEY_RETURN)         → confirmar / hacer click
+//  Pad ↓  Abajo     (KEY_DOWN_ARROW)    → cerrar modal activo / regresar
+//         Escape                         → también cierra modal (teclado físico)
+ 
+// ─── Detecta qué modal está abierto en este momento
+function obtenerModalActivo() {
+    const ids = [
+        "modal-palomitas",
+        "modal-refrescos",
+        "modal-icee",
+        "modal-combo1",
+        "modal-confirmacion"
+    ];
+ 
+    for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        // modal-confirmacion usa clase "visible", el resto usa ausencia de "hidden"
+        if (id === "modal-confirmacion") {
+            if (el.classList.contains("visible")) return el;
+        } else {
+            if (!el.classList.contains("hidden")) return el;
+        }
+    }
+    return null;
+}
+ 
+// ─── Devuelve botones navegables según contexto (modal abierto o página normal)
+function obtenerBotonesVisibles() {
+    const modal = obtenerModalActivo();
+ 
+    if (modal) {
+        // Solo navega por los botones DENTRO del modal activo
+        return Array.from(modal.querySelectorAll("button"))
+            .filter(el => el.offsetParent !== null && !el.disabled);
+    }
+ 
+    // Sin modal: botones de la página principal visibles
+    return Array.from(document.querySelectorAll(
+        ".nav-btn, .cat-btn, .btn-seleccionar, .btn-agregar, .btn-combo, " +
+        ".btn-pagar, .btn-vaciar, .ci-eliminar, .ci-btn, .ci-editar"
+    )).filter(el => el.offsetParent !== null && !el.disabled);
+}
+ 
+// ─── Cierra el modal activo simulando clic en su botón Cancelar/Regresar
+function cerrarModalActivo() {
+    const modal = obtenerModalActivo();
+    if (!modal) return false;
+ 
+    // Busca el botón cancelar específico de cada modal
+    const selectores = [
+        "#cancelar",           // modal palomitas
+        "#cancelar-refresco",  // modal refrescos
+        "#cancelar-icee",      // modal icee
+        "#combo1-cancelar",    // modal combo1
+        "#conf-cancelar",      // modal confirmacion
+        ".cancelar"            // fallback genérico
+    ];
+ 
+    for (const sel of selectores) {
+        const btn = modal.querySelector(sel);
+        if (btn) {
+            btn.click();
+            return true;
+        }
+    }
+ 
+    // Si no encuentra botón, cierra directamente
+    modal.classList.add("hidden");
+    modal.classList.remove("visible");
+    leerTexto("Cancelado");
+    return true;
+}
+ 
+// ─── Listener principal del teclado Makey Makey
+document.addEventListener("keydown", function(e) {
+ 
+    // ── TAB (flecha derecha) → siguiente botón
+    if (e.key === "Tab" && !e.shiftKey) {
+        e.preventDefault();
+        const items = obtenerBotonesVisibles();
+        if (items.length === 0) return;
+ 
+        let index = items.indexOf(document.activeElement);
+        const siguiente = (index + 1) % items.length;
+        items[siguiente].focus();
+        leerTexto(items[siguiente].textContent.trim() || "botón");
+    }
+ 
+    // ── SHIFT izquierdo (flecha izquierda) → botón anterior
+    if (e.key === "Shift" && e.location === 1) {
+        e.preventDefault();
+        const items = obtenerBotonesVisibles();
+        if (items.length === 0) return;
+ 
+        let index = items.indexOf(document.activeElement);
+        if (index === -1) index = 0;
+        const anterior = (index - 1 + items.length) % items.length;
+        items[anterior].focus();
+        leerTexto(items[anterior].textContent.trim() || "botón");
+    }
+ 
+    // ── ENTER → confirmar / hacer click en el botón enfocado
+    if (e.key === "Enter") {
+        e.preventDefault();
+        const activo = document.activeElement;
+        if (activo && activo.tagName === "BUTTON") {
+            activo.click();
+            leerTexto("Seleccionado: " + activo.textContent.trim());
+        }
+    }
+ 
+    // ── FLECHA ABAJO → cerrar modal activo / regresar
+    if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const modalCerrado = cerrarModalActivo();
+ 
+        if (!modalCerrado) {
+            // Sin modal abierto: regresa a la sección de alimentos
+            const btnAlimentos = document.querySelector('.nav-btn[data-seccion="alimentos"]');
+            if (btnAlimentos) {
+                btnAlimentos.click();
+                btnAlimentos.focus();
+                leerTexto("Alimentos");
+            }
+        }
+    }
+ 
+    // ── ESCAPE → también cierra modal (teclado físico)
+    if (e.key === "Escape") {
+        cerrarModalActivo();
+    }
+ 
+});
+ 
+// ─── Foco inicial: primer botón de nav al cargar la página
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        const primero = Array.from(document.querySelectorAll(".nav-btn"))
+            .find(el => el.offsetParent !== null);
+        if (primero) primero.focus();
+    }, 900);
+});
