@@ -674,7 +674,7 @@
         <p class="producto-precio">$178</p> <img src="Botones/Positivo/Flecha D_1.png "width="25px"> <p class="producto-precio">$185</p>
     </span>
 
-    <button class="btn-combo">Modificar</button>
+    <button class="btn-combo" data-combo="1">Modificar</button>
 </div>
 
 <div class="combo-card producto" data-seccion="combos"data-cat="individuales">
@@ -843,9 +843,148 @@
     </div>
 </div>
 
+<!--Modal Icee-->
+<div id="modal-icee" class="modal hidden">
+    <div class="modal-content">
+ 
+        <div class="modal-layout">
+            <div class="modal-imagen">
+                <img id="icee-img" src="" alt="Icee">
+            </div>
+ 
+            <div class="modal-opciones-lista">
+                <p class="modal-producto" id="icee-nombre">Icee Blueberry</p>
+                <p class="modal-subtitulo">Selecciona el tamaño de tu Icee</p>
+ 
+                <div class="fila-opcion" data-size="Vaso mediano" data-precio="73" data-modal="icee">
+                    <span class="fp-nombre">Vaso mediano</span>
+                    <span class="fp-precio">$73</span>
+                    <span class="fr-hielo-placeholder"></span>
+                    <div class="modal-contador">
+                        <button class="menos"><img src="Botones/Positivo/Menos.png" width="20"></button>
+                        <span class="cantidad">0</span>
+                        <button class="mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
+                    </div>
+                </div>
+ 
+                <div class="fila-opcion" data-size="Vaso grande" data-precio="81" data-modal="icee">
+                    <span class="fp-nombre">Vaso grande</span>
+                    <span class="fp-precio">$81</span>
+                    <span class="fr-hielo-placeholder"></span>
+                    <div class="modal-contador">
+                        <button class="menos"><img src="Botones/Positivo/Menos.png" width="20"></button>
+                        <span class="cantidad">0</span>
+                        <button class="mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
+                    </div>
+                </div>
+ 
+            </div>
+        </div>
+ 
+        <div class="modal-footer">
+            <button class="cancelar" id="cancelar-icee">
+                <img src="Botones/Positivo/Cancelar.png" width="16px"> Cancelar
+            </button>
+            <button class="confirmar" id="confirmar-icee">Agregar</button>
+        </div>
+    </div>
+</div>
+
 </div>
     <!-- ── Vista del carrito ── -->
     <div id="vista-carrito"></div>
+
+<!-- ── Modal Combo 1 ── -->
+<div id="modal-combo1" class="combo-modal hidden">
+    <div class="combo-modal-inner">
+
+        <div class="combo-progreso">
+            <div class="combo-paso activo" data-paso="1">
+                <span class="combo-paso-circulo">1</span>
+                <p class="combo-paso-label">Elige el sabor de<br>tus palomitas</p>
+            </div>
+            <div class="combo-linea"></div>
+            <div class="combo-paso" data-paso="2">
+                <span class="combo-paso-circulo">2</span>
+                <p class="combo-paso-label">Paso 2</p>
+            </div>
+            <div class="combo-linea"></div>
+            <div class="combo-paso" data-paso="3">
+                <span class="combo-paso-circulo">3</span>
+                <p class="combo-paso-label">Paso 3</p>
+            </div>
+            <div class="combo-linea"></div>
+            <div class="combo-paso" data-paso="4">
+                <span class="combo-paso-circulo">4</span>
+                <p class="combo-paso-label">Paso 4</p>
+            </div>
+            <div class="combo-linea"></div>
+            <div class="combo-paso" data-paso="5">
+                <span class="combo-paso-circulo">5</span>
+                <p class="combo-paso-label">Paso 5</p>
+            </div>
+        </div>
+
+        <div class="combo-header">
+            <div>
+                <p class="combo-titulo">Combo 1</p>
+                <p class="combo-desc">Palomitas grandes, 2 bebidas y 1 chocolate</p>
+            </div>
+            <button class="cancelar" id="combo1-cancelar"> <img src="Botones/Positivo/Cancelar.png" width="16px"> Cancelar</button>
+        </div>
+
+        <div class="combo-step" id="combo1-paso1">
+            <div class="combo-cards-grid" id="combo1-palomitas-grid"></div>
+        </div>
+
+        <div class="combo-step hidden" id="combo1-paso2">
+            <div class="combo-cards-grid" id="combo1-bebida1-grid"></div>
+            <div class="combo-bebida-tipo hidden" id="combo1-bebida1-tipo">
+                <button class="combo-tipo-btn activo" data-tipo="vaso">Vaso mediano</button>
+                <button class="combo-tipo-btn" data-tipo="lata"> <img src="Botones/Negativo/Lata Btn.png" width="20" margin="8px">Lata</button>
+                <label class="switch-hielo" id="combo1-bebida1-hielo">
+                    <span class="switch-label">Hielo</span>
+                    <div class="switch-track">
+                        <input type="checkbox" class="fr-hielo-check" checked>
+                        <span class="switch-thumb"></span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="combo-step hidden" id="combo1-paso3">
+            <div class="combo-cards-grid" id="combo1-bebida2-grid"></div>
+            <div class="combo-bebida-tipo hidden" id="combo1-bebida2-tipo">
+                <button class="combo-tipo-btn activo" data-tipo="vaso">Vaso mediano</button>
+                <button class="combo-tipo-btn" data-tipo="lata"> <img src="Botones/Negativo/Lata Btn.png" width="20" margin="8px";> Lata</button>
+                <label class="switch-hielo" id="combo1-bebida2-hielo">
+                    <span class="switch-label">Hielo</span>
+                    <div class="switch-track">
+                        <input type="checkbox" class="fr-hielo-check" checked>
+                        <span class="switch-thumb"></span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="combo-step hidden" id="combo1-paso4">
+            <div class="combo-cards-grid" id="combo1-chocolate-grid"></div>
+        </div>
+
+        <div class="combo-step hidden" id="combo1-paso5">
+            <p class="combo-resumen-titulo">Confirma tu pedido</p>
+            <p class="combo-resumen-subtitulo">Palomitas grandes, 2 bebidas y 1 chocolate</p>
+            <div id="combo1-resumen-lista"></div>
+        </div>
+
+        <div class="combo-footer">
+            <button class="cancelar hidden" id="combo1-regresar"> <img src="Botones/Positivo/Flecha R.png" width="16px"> Regresar</button>
+            <div></div>
+            <button class="confirmar" id="combo1-confirmar"> <img src="Botones/Positivo/Confirmar.png" width="16px">Confirmar</button>
+        </div>
+
+    </div>
+</div>
 
 </main>
 

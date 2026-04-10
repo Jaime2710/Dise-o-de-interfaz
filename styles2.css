@@ -64,26 +64,28 @@ justify-content:center;
 margin-bottom:32px;
 gap:83px;
 }
+
 .icono{ 
     height:31px;
     margin-bottom: 5px;
 }
 .nav-btn{
-
 height:55px;
 width: 154px;
 font-size: 25px;
 font-weight: 600;
-color:#E5E8E1 ;
+color:#E5E8E1;
 border:none;
-cursor:pointer;
 display: flex;
 align-items: center;
 justify-content: center; 
 gap: 14px;
 padding: 15px 25px;
 background-color: #1F3A44;
+}
 
+.nav-btn.activo{
+    border-bottom: 5px solid #E5E8E1 ;
 }
 
 .pictos{
@@ -533,6 +535,10 @@ justify-content: center;
     font-size: 20px;
     font-weight: 400;
     cursor: pointer;
+    display: flex;        /* ← agregar */
+    align-items: center;  /* ← agregar */
+    text-align: center;
+
 }
 
 
@@ -635,12 +641,10 @@ justify-content: center;
                                 
 
 #carrito-badge {
-    background: #6E2C1E;
     color: #E5E8E1;
-    border-radius: 50%;
     width: 22px;
     height: 22px;
-    font-size: 13px;
+    font-size: 20px;
     font-weight: 700;
     display: none;
     align-items: center;
@@ -1052,3 +1056,643 @@ justify-content: center;
     gap: 16px;
 }
 
+
+/* ══════════════════════════════════════════════════════
+   COMBO 1 WIZARD
+   ══════════════════════════════════════════════════════ */
+
+.combo-wizard {
+    padding: 32px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+/* ─── Barra de progreso wizard */
+.cw-progreso {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+}
+
+.cw-paso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    min-width: 90px;
+}
+
+.cw-paso p {
+    font-size: 13px;
+    line-height: 1.3;
+    color: #888;
+}
+
+.cw-circulo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ccc;
+    transition: all 0.3s;
+}
+
+.cw-paso.activo .cw-circulo {
+    border-color: #6E2C1E;
+    color: #6E2C1E;
+}
+
+.cw-paso.activo p { color: #1F3A44; font-weight: 600; }
+
+.cw-paso.completado .cw-circulo {
+    border-color: #6E2C1E;
+    background: #6E2C1E;
+    color: white;
+}
+
+.cw-paso.completado .cw-circulo span::after { content: "✓"; }
+.cw-paso.completado .cw-circulo span { font-size: 0; }
+.cw-paso.completado .cw-circulo::after { content: "✓"; font-size: 16px; color: white; }
+
+.cw-linea {
+    flex: 1;
+    height: 3px;
+    background: #ccc;
+    margin-top: 16px;
+    transition: background 0.3s;
+    min-width: 32px;
+}
+
+.cw-linea.completada { background: #6E2C1E; }
+
+/* ─── Header del combo */
+.cw-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cw-titulo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1F3A44;
+    margin-bottom: 4px;
+}
+
+.cw-subtitulo {
+    font-size: 16px;
+    color: #555;
+}
+
+/* ─── Tarjetas seleccionables */
+.cw-opciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cw-bebidas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 198px);
+    gap: 20px;
+}
+
+.cw-card {
+    position: relative;
+    width: 198px;
+    height: 192px;
+    background: #E5E8E1;
+    border-radius: 12px;
+    border: 3px solid transparent;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    text-align: center;
+}
+
+.cw-card img {
+    width: 107px;
+    height: 107px;
+    object-fit: contain;
+}
+
+.cw-card p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F3A44;
+    line-height: 1.3;
+}
+
+.cw-check-badge {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #6E2C1E;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.cw-card.seleccionada {
+    border: 5px solid #6E2C1E;
+    box-shadow: none;
+}
+
+.cw-card.seleccionada .cw-check-badge {
+    display: flex;
+}
+
+/* ─── Opciones de bebida (formato + hielo) */
+.cw-bebida-opciones {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 16px 0 0;
+    flex-wrap: wrap;
+}
+
+.cw-formato-titulo {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1F3A44;
+}
+
+.cw-formato-btns {
+    display: flex;
+    gap: 16px;
+}
+
+.cw-formato-btn {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 3px solid #ccc;
+    background: #E5E8E1;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #555;
+    transition: all 0.2s;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.cw-formato-btn span {
+    display: block;
+    font-size: 18px;
+    color: #6E2C1E;
+}
+
+.cw-formato-btn.activo {
+    border-color: #6E2C1E;
+    background: #6E2C1E;
+    color: white;
+}
+
+.cw-formato-btn.activo span { color: white; }
+
+.cw-hielo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1F3A44;
+}
+
+/* ─── Resumen paso 5 */
+.cw-resumen-titulo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1F3A44;
+    margin-bottom: 4px;
+}
+
+.cw-resumen-sub {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.cw-resumen-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.cw-resumen-fila {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.12);
+}
+
+.cw-resumen-fila img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.cw-resumen-fila span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1F3A44;
+}
+
+.cw-resumen-fila strong {
+    color: #6E2C1E;
+    margin-right: 6px;
+}
+
+.cw-editar-btn {
+    background: #6E2C1E;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.cw-resumen-total {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1F3A44;
+    text-align: right;
+}
+
+/* ─── Footer del wizard */
+.cw-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+/* ─── Carrito: item combo */
+.carrito-item-combo .carrito-variedad {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ── Modal Icee — misma fila que palomitas ── */
+#modal-icee .fila-opcion {
+    grid-template-columns: 2fr 80px 154px;
+    grid-template-rows: 1fr;
+    align-items: center;
+}
+#modal-icee .fila-opcion .fp-nombre { grid-column: 1; grid-row: 1; }
+#modal-icee .fila-opcion .fp-precio { grid-column: 2; grid-row: 1; }
+#modal-icee .fila-opcion .modal-contador {
+    grid-column: 3; grid-row: 1;
+    width: 154px;
+    justify-content: space-between;
+    gap: 0;
+}
+#modal-icee .fila-opcion .mas,
+#modal-icee .fila-opcion .menos {
+    width: 45px; height: 30px; border-radius: 12px;
+}
+
+
+
+/* ============================================================ */
+/* COMBO 1 — Modal de pasos                                     */
+/* ============================================================ */
+
+.combo-modal {
+    position: fixed;
+    top: 135px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #E5E8E1;
+    z-index: 800;
+    overflow-y: auto;
+}
+
+.combo-modal-inner {
+    width: 1024px;
+    margin: 0 auto;
+    padding: 32px 80px 48px;
+    box-sizing: border-box;
+}
+
+/* ── Barra de progreso ── */
+.combo-progreso {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.combo-paso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    font-size: 14px;
+    min-width: 90px;
+}
+
+.combo-paso-circulo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 3px solid #1F3A44;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1F3A44;
+    background: transparent;
+    flex-shrink: 0;
+}
+
+.combo-paso-label {
+    font-size: 13px;
+    color: #1F3A44;
+    line-height: 1.3;
+    max-width: 90px;
+}
+
+.combo-paso.activo .combo-paso-label {
+    font-weight: 700;
+}
+
+.combo-paso.completado .combo-paso-circulo {
+    background: #6E2C1E;
+    border-color: #6E2C1E;
+    color: #E5E8E1;
+}
+
+.combo-linea {
+    width: 50px;
+    height: 3px;
+    background: #1F3A44;
+    margin-top: 14px;
+    flex-shrink: 0;
+}
+
+.combo-linea.completada {
+    background: #6E2C1E;
+}
+
+/* ── Header del combo ── */
+.combo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+}
+
+.combo-titulo {
+    font-size: 25px;
+    font-weight: 700;
+    color: #1F3A44;
+    margin-bottom: 4px;
+}
+
+.combo-desc {
+    font-size: 18px;
+    color: #555;
+}
+
+/* ── Grid de tarjetas seleccionables ── */
+.combo-cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 24px;
+    min-height: 220px;
+}
+
+/* Tarjeta seleccionable */
+.combo-sel-card {
+    width: 198px;
+    height: 192px;
+    background: #E5E8E1;
+    border-radius: 12px;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.15);
+    border: 3px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.combo-sel-card:hover {
+    box-shadow: 1px 1px 8px 2px rgba(0,0,0,0.2);
+}
+
+.combo-sel-card img {
+    width: 107px;
+    height: 107px;
+    object-fit: contain;
+}
+
+.combo-sel-card p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1F3A44;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.combo-sel-card.seleccionado {
+    border-color: #6E2C1E;
+    box-shadow: none;
+}
+
+.combo-sel-card.seleccionado::after {
+    content: "\2713";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 26px;
+    height: 26px;
+    background: #6E2C1E;
+    border-radius: 50%;
+    color: #E5E8E1;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 26px;
+    text-align: center;
+}
+
+/* ── Selector de tipo (vaso/lata) para bebidas ── */
+.combo-bebida-tipo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    margin-bottom: 8px;
+    background: #E5E8E1;
+    border-radius: 12px;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.15);
+}
+
+.combo-tipo-btn {
+    padding: 10px 24px;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.25);
+    border: none;
+    border-radius: 12px;
+    background: #E5E8E1;
+    color: #1F3A44;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    Gap:8px;
+    height: 64px;
+}
+
+.combo-tipo-btn.activo {
+    color: #1F3A44;
+    border-radius: 12px;
+    border:2px solid;
+    border:#6E2C1E 5 px solid;
+    box-shadow:none;
+    cursor: pointer;
+    Gap:8px;
+    height: 64px;
+}
+
+/* ── Paso 5: Resumen ── */
+.combo-resumen-titulo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1F3A44;
+    margin-bottom: 4px;
+}
+
+.combo-resumen-subtitulo {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 24px;
+}
+
+.combo-resumen-item {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.combo-resumen-item:last-child {
+    border-bottom: none;
+}
+
+.combo-resumen-item img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+}
+
+.combo-resumen-nombre {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1F3A44;
+}
+
+.combo-resumen-check {
+    width: 26px;
+    height: 26px;
+    background: #005700;
+    border-radius: 50%;
+    color: #E5E8E1;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 26px;
+    text-align: center;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.combo-resumen-editar {
+    background: #6E2C1E;
+    color: #E5E8E1;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.combo-resumen-editar img {
+    width: 20px;
+    height: 20px;
+}
+/* ── Footer del modal combo ── */
+.combo-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    margin-top: 16px;
+    border-top: 2px solid #1F3A44;
+}
+
+/* ── Carrito: item tipo combo ── */
+.carrito-item-combo .carrito-variedad {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.4;
+    font-weight: 400;
+}
