@@ -67,6 +67,7 @@ document.querySelectorAll(".nav-btn").forEach(boton => {
             if (progreso) progreso.style.display = "flex";
             contenedorCategorias.style.display = "none";
             filtrarProductos(secciones.combos[0]);
+            textoInstruccion.textContent = "Presiona Modificar para personalizar tu combo"; // ← agregar
         } else {
             grid.classList.remove("combos");
             if (progreso) progreso.style.display = "none";
@@ -287,23 +288,25 @@ document.getElementById("confirmar-refresco")?.addEventListener("click", () => {
         return;
     }
 
-    for (const size in seleccionRefrescos) {
-        const { cantidad, precio, conHielo } = seleccionRefrescos[size];
-        // Variedad incluye hielo si aplica
+    const itemsRef = Object.entries(seleccionRefrescos).map(([size, {cantidad, precio, conHielo}]) => {
         const variedad = conHielo === true  ? `${size} con hielo`
                        : conHielo === false ? `${size} sin hielo`
                        : size;
-        agregarAlCarrito(
-            `refresco-${nombre}-${size}`.replace(/\s+/g, "-").toLowerCase(),
-            nombre, variedad, precio, cantidad, imgSrc
-        );
-    }
+        return {
+            id: `refresco-${nombre}-${size}`.replace(/\s+/g, "-").toLowerCase(),
+            nombre, variedad, precio, cantidad, img: imgSrc
+        };
+    });
 
     modal.classList.add("hidden");
-    mostrarToast(`${nombre} agregado al carrito`);
-    actualizarBadgeCarrito();
-    leerTexto("Agregado al carrito");
-    seleccionRefrescos = {};
+
+    abrirConfirmacionPrevia(itemsRef, () => {
+        itemsRef.forEach(i => agregarAlCarrito(i.id, i.nombre, i.variedad, i.precio, i.cantidad, i.img));
+        mostrarToast(`${nombre} agregado al carrito`);
+        actualizarBadgeCarrito();
+        leerTexto("Agregado al carrito");
+        seleccionRefrescos = {};
+    });
 });
 
 // Cancelar modal refrescos
@@ -347,19 +350,21 @@ document.getElementById("confirmar")?.addEventListener("click", () => {
         return;
     }
 
-    for (const size in seleccionModal) {
-        const { cantidad, precio } = seleccionModal[size];
-        agregarAlCarrito(
-            `${nombre}-${size}`.replace(/\s+/g, "-").toLowerCase(),
-            nombre, size, precio, cantidad, imgSrc
-        );
-    }
+    // Construir items para confirmación previa
+    const itemsPal = Object.entries(seleccionModal).map(([size, {cantidad, precio}]) => ({
+        id: `${nombre}-${size}`.replace(/\s+/g, "-").toLowerCase(),
+        nombre, variedad: size, precio, cantidad, img: imgSrc
+    }));
 
     modal.classList.add("hidden");
-    mostrarToast(`${nombre} agregado al carrito`);
-    actualizarBadgeCarrito();
-    leerTexto("Agregado al carrito");
-    seleccionModal = {};
+
+    abrirConfirmacionPrevia(itemsPal, () => {
+        itemsPal.forEach(i => agregarAlCarrito(i.id, i.nombre, i.variedad, i.precio, i.cantidad, i.img));
+        mostrarToast(`${nombre} agregado al carrito`);
+        actualizarBadgeCarrito();
+        leerTexto("Agregado al carrito");
+        seleccionModal = {};
+    });
 });
 
 document.getElementById("cancelar")?.addEventListener("click", () => {
@@ -422,19 +427,20 @@ document.getElementById("confirmar-icee")?.addEventListener("click", () => {
         return;
     }
 
-    for (const size in seleccionIcee) {
-        const { cantidad, precio } = seleccionIcee[size];
-        agregarAlCarrito(
-            `icee-${nombre}-${size}`.replace(/\s+/g, "-").toLowerCase(),
-            nombre, size, precio, cantidad, imgSrc
-        );
-    }
+    const itemsIcee = Object.entries(seleccionIcee).map(([size, {cantidad, precio}]) => ({
+        id: `icee-${nombre}-${size}`.replace(/\s+/g, "-").toLowerCase(),
+        nombre, variedad: size, precio, cantidad, img: imgSrc
+    }));
 
     modal.classList.add("hidden");
-    mostrarToast(`${nombre} agregado al carrito`);
-    actualizarBadgeCarrito();
-    leerTexto("Agregado al carrito");
-    seleccionIcee = {};
+
+    abrirConfirmacionPrevia(itemsIcee, () => {
+        itemsIcee.forEach(i => agregarAlCarrito(i.id, i.nombre, i.variedad, i.precio, i.cantidad, i.img));
+        mostrarToast(`${nombre} agregado al carrito`);
+        actualizarBadgeCarrito();
+        leerTexto("Agregado al carrito");
+        seleccionIcee = {};
+    });
 });
 
 // Cancelar Icee
@@ -442,6 +448,52 @@ document.getElementById("cancelar-icee")?.addEventListener("click", () => {
     document.getElementById("modal-icee")?.classList.add("hidden");
     leerTexto("Cancelado");
 });
+
+// ─── Confirmación previa (resumen antes de agregar al carrito)
+// Recibe un array de items: [{ nombre, variedad, precio, cantidad, img, id, tipo?, comboData? }]
+// y un callback que se ejecuta si el usuario confirma
+function abrirConfirmacionPrevia(items, onConfirmar) {
+    const modal = document.getElementById("modal-confirmacion");
+    if (!modal) { onConfirmar(); return; }
+
+    // Calcular total
+    const total = items.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
+
+    // Construir resumen en texto
+    const resumen = items.map(i => {
+        const v = i.variedad ? ` — ${i.variedad}` : "";
+        return `${i.cantidad}x ${i.nombre}${v}`;
+    }).join(", ");
+
+    // Imagen: usar la del primer item
+    const img = items[0]?.img || "";
+
+    // Rellenar el modal existente
+    document.getElementById("conf-img").src            = img;
+    document.getElementById("conf-nombre").textContent = items.length === 1
+        ? items[0].nombre + (items[0].variedad ? ` — ${items[0].variedad}` : "")
+        : items.map(i => `${i.cantidad}x ${i.nombre}${i.variedad ? " — " + i.variedad : ""}`).join(" · ");
+    document.getElementById("conf-detalle").textContent = `Cantidad: ${items.reduce((a,i) => a + i.cantidad, 0)}`;
+    document.getElementById("conf-total").textContent  = `Total: $${total.toFixed(0)}`;
+
+    modal.classList.add("visible");
+    leerTexto(`Total $${total.toFixed(0)}. ¿Confirmas tu pedido?`);
+
+    // Botón Agregar → ejecuta callback
+    document.getElementById("conf-agregar").onclick = () => {
+        modal.classList.remove("visible");
+        onConfirmar();
+    };
+
+    document.getElementById("conf-cancelar").onclick = () => {
+        modal.classList.remove("visible");
+        leerTexto("Cancelado");
+    };
+
+    modal.querySelector(".modal-conf-overlay").onclick = () => {
+        modal.classList.remove("visible");
+    };
+}
 
 // ─── Motor del carrito
 function agregarAlCarrito(id, nombre, variedad, precio, cantidad, img) {
@@ -534,7 +586,7 @@ function renderizarCarrito(contenedor) {
                             <span class="ci-cantidad">${item.cantidad}</span>
                             <button class="ci-btn ci-mas" data-idx="${idx}"> <img src="Botones/Positivo/Mas.png" width="17" onerror="this.style.display='none'"> </button>
                         </div>
-                        ${conModal ? `<button class="ci-editar" data-idx="${idx}">Editar</button>` : ""}
+                        ${conModal ? `<button class="ci-editar" data-idx="${idx}"> <img src="Botones/Positivo/Editar.png" width="20" onerror="this.style.display='none'"> Editar</button>` : ""}
                     </div>
                 </div>`;
             }
@@ -545,9 +597,9 @@ function renderizarCarrito(contenedor) {
 
     html += `
     <div class="carrito-footer">
-        <button class="btn-vaciar" id="btn-vaciar-carrito">Vaciar</button>
+        <button class="btn-vaciar" id="btn-vaciar-carrito"> <img src="Botones/Positivo/Vaciar.png" width="20"> Vaciar</button>
         <span class="carrito-total-label">Total: $${totalGeneral.toFixed(0)}</span>
-        <button class="btn-pagar" id="btn-pagar">Pagar</button>
+        <button class="btn-pagar" id="btn-pagar"> Pagar</button>
     </div>`;
 
     contenedor.innerHTML = html;
@@ -625,8 +677,7 @@ function renderizarCarrito(contenedor) {
             leerTexto("Tu carrito esta vacio");
             return;
         }
-        leerTexto("Procediendo al pago");
-        mostrarToast("Procediendo al pago");
+        abrirModalPago();
     });
 }
 
@@ -663,16 +714,42 @@ function generarId(nombre) {
     return (nombre || "prod").toLowerCase().replace(/\s+/g, "-") + "-" + Date.now();
 }
 
+// ─── Modal de método de pago
+function abrirModalPago() {
+    const modal = document.getElementById("modal-pago");
+    if (!modal) return;
+    modal.classList.add("visible");
+    leerTexto("Selecciona tu metodo de pago");
+}
+
+document.getElementById("pago-tarjeta")?.addEventListener("click", () => {
+    document.getElementById("modal-pago")?.classList.remove("visible");
+    mostrarToast("Pago con tarjeta seleccionado");
+    leerTexto("Pago con tarjeta");
+    setTimeout(() => { window.location.href = "index.html?pago=ok"; }, 1500);
+});
+
+document.getElementById("pago-efectivo")?.addEventListener("click", () => {
+    document.getElementById("modal-pago")?.classList.remove("visible");
+    mostrarToast("Pago en efectivo seleccionado");
+    leerTexto("Pago en efectivo");
+    setTimeout(() => { window.location.href = "index.html?pago=ok"; }, 1500);
+});
+
+document.getElementById("modal-pago-cancelar")?.addEventListener("click", () => {
+    document.getElementById("modal-pago")?.classList.remove("visible");
+    leerTexto("Cancelado");
+});
+
+document.getElementById("modal-pago-overlay")?.addEventListener("click", () => {
+    document.getElementById("modal-pago")?.classList.remove("visible");
+});
+
 // ─── Inicializacion
 window.addEventListener("load", () => {
     document.querySelector('.nav-btn[data-seccion="alimentos"]')?.click();
     setTimeout(() => leerTexto("Selecciona una categoria para comenzar"), 800);
 });
-
-
-
-
-
 
 // Combo 1 — Flujo de 5 pasos
 
@@ -815,12 +892,19 @@ function combo1IrAPaso(paso) {
 
     // Footer: mostrar Regresar desde paso 2 en adelante
     const btnReg = document.getElementById("combo1-regresar");
-    if (btnReg) btnReg.classList.toggle("hidden", paso === 1);
+    if (btnReg) {
+        btnReg.classList.toggle("hidden", paso === 1);
+        btnReg.innerHTML = `<img src="Botones/Positivo/Flecha R.png" width="20" style="display:inline-block;vertical-align:middle;flex-shrink:0;" onerror="this.style.display='none'"> Regresar`;
+        btnReg.style.cssText = "display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;";
+    }
 
     // Cambiar texto del Confirmar en paso 5
     const btnConf = document.getElementById("combo1-confirmar");
-    if (btnConf) btnConf.innerHTML = paso === 5 ? `<img src="Botones/Positivo/Confirmar.png" width="16"> Confirmar pedido`
-    : `<img src="Botones/Positivo/Confirmar.png" width="16"> Confirmar`;
+    if (btnConf) {
+        const txt = paso === 5 ? "Confirmar" : "Confirmar";
+        btnConf.innerHTML = `<img src="Botones/Positivo/Confirmar.png" width="20" style="display:inline-block;vertical-align:middle;flex-shrink:0;"> ${txt}`;
+        btnConf.style.cssText = "display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;";
+    }
 }
 
 // ── Actualiza circulos y lineas de la barra ──
@@ -829,23 +913,29 @@ function combo1ActualizarProgreso(pasoActual) {
     const lineas = document.querySelectorAll("#modal-combo1 .combo-linea");
 
     pasos.forEach((p, i) => {
-        const num = i + 1;
+        const num    = i + 1;
+        const label  = p.querySelector(".combo-paso-label");
+        // El circulo tiene: texto del número + <img> del check
+        // Solo actualizamos el nodo de texto, sin tocar la imagen
+        const circulo    = p.querySelector(".combo-paso-circulo");
+        const textoNodo  = circulo ? Array.from(circulo.childNodes).find(n => n.nodeType === 3) : null;
+
         p.classList.remove("activo", "completado");
 
-        const circulo = p.querySelector(".combo-paso-circulo");
-        const label   = p.querySelector(".combo-paso-label");
-
         if (num < pasoActual) {
+            // Completado — ocultar número, mostrar imagen via CSS
             p.classList.add("completado");
-            if (circulo) circulo.textContent = "\u2713";
-            if (label)   label.innerHTML = `Paso ${num}`;
+            if (textoNodo) textoNodo.textContent = "";
+            if (label) label.innerHTML = `Paso ${num}`;
         } else if (num === pasoActual) {
+            // Activo — mostrar número
             p.classList.add("activo");
-            if (circulo) circulo.textContent = String(num);
-            if (label)   label.innerHTML = COMBO1_LABELS[i];
+            if (textoNodo) textoNodo.textContent = String(num);
+            if (label) label.innerHTML = COMBO1_LABELS[i];
         } else {
-            if (circulo) circulo.textContent = String(num);
-            if (label)   label.innerHTML = `Paso ${num}`;
+            // Pendiente — mostrar número
+            if (textoNodo) textoNodo.textContent = String(num);
+            if (label) label.innerHTML = `Paso ${num}`;
         }
     });
 
@@ -881,7 +971,7 @@ function combo1RenderResumen() {
         <div class="combo-resumen-item">
             <img src="${item.img || ''}" alt="${item.nombre}" onerror="this.src=''">
             <span class="combo-resumen-nombre">
-                <span class="combo-resumen-check">&#x2713;</span>
+                <span class="combo-resumen-check"> <img src="Botones/Positivo/Confirmar.png" width="15" onerror="this.style.display='none'"> </span>
                 ${item.nombre || "—"}
             </span>
             <button class="combo-resumen-editar" data-paso="${item.paso}">
@@ -912,7 +1002,7 @@ function combo1AgregarAlCarrito() {
         variedad:  desc,
         precio,
         cantidad:  1,
-        img:       e.palomitas.img,
+        img:       "dulceria imgs/Combos/Combo 1.png",
         tipo:      "combo",
         comboData: {
             palomitas: { ...e.palomitas },
@@ -943,7 +1033,27 @@ document.getElementById("combo1-confirmar")?.addEventListener("click", () => {
         if (paso === 4) combo1RenderResumen();
         combo1IrAPaso(paso + 1);
     } else {
-        combo1AgregarAlCarrito();
+        // Mostrar confirmación previa antes de agregar combo al carrito
+        const e = COMBO1.estado;
+        const precio = combo1Precio();
+        const b1 = combo1DescBebida(e.bebida1);
+        const b2 = combo1DescBebida(e.bebida2);
+        const desc = `${e.palomitas.nombre}, ${b1}, ${b2}, ${e.chocolate.nombre}`;
+
+        const itemsCombo = [{
+            id:       `combo1-prev-${Date.now()}`,
+            nombre:   "Combo 1",
+            variedad: desc,
+            precio,
+            cantidad: 1,
+            img:      "dulceria imgs/Combos/Combo 1.png"
+        }];
+
+        document.getElementById("modal-combo1")?.classList.add("hidden");
+
+        abrirConfirmacionPrevia(itemsCombo, () => {
+            combo1AgregarAlCarrito();
+        });
     }
 });
 
@@ -1080,23 +1190,7 @@ function cerrarModalActivo() {
  
 // ─── Listener principal del teclado Makey Makey
 document.addEventListener("keydown", function(e) {
-    // ── HOME (flecha arriba) → ir al primer botón
-if (e.key === "Home") {
-    e.preventDefault();
-    const items = obtenerBotonesVisibles();
-    if (items.length === 0) return;
-    items[0].focus();
-    leerTexto(items[0].textContent.trim() || "botón");
-}
-
-// ── END (botón click) → ir al último botón
-if (e.key === "End") {
-    e.preventDefault();
-    const items = obtenerBotonesVisibles();
-    if (items.length === 0) return;
-    items[items.length - 1].focus();
-    leerTexto(items[items.length - 1].textContent.trim() || "botón");
-}
+ 
     // ── TAB (flecha derecha) → siguiente botón
     if (e.key === "Tab" && !e.shiftKey) {
         e.preventDefault();

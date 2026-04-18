@@ -6,26 +6,26 @@
 <title>Dulcería Cineteca Nacional</title>
 <link rel="stylesheet" href="styles2.css">
 </head>
-
+ 
 <body>
-
+ 
 <!-- Header -->
 <header class="header">
-
+ 
 <div class="header-content">
-
+ 
     <div class="header-left col-1">
         <img class="logo-hormiga" src="dulceria imgs/OLA.png" width="64px"> </img>
     </div>
-
+ 
     <div class="header-right col-1">
         <img class="logo-hormiga" src="dulceria imgs/Cineteca Nacional ngt.png" width="146px" height="52px"> </img>
     </div>
-
+ 
 </div>
-
+ 
 </header>
-
+ 
 <!--Nav secciones-->
 <nav class="nav-secciones">
     <button class="nav-btn" data-seccion="alimentos"> <img class="icono" src="Botones/Positivo/Alimentos btn.png"> Alimentos</button>
@@ -33,54 +33,65 @@
     <button class="nav-btn" data-seccion="combos"><img class="icono" src="Botones/Positivo/Combos btn.png">Combos</button>
     <button class="nav-btn" data-seccion="carrito"><img class="icono" src="Botones/Positivo/Carrito btn.png">Carrito</button>
 </nav>
-
+ 
 <div class="container">
-
+ 
 <!-- Barra de categorias -->
     <!-- Categorias -->
     <div class="categorias" id="categorias"></div>
-
+ 
     <div class="Instruccion">
     <p id="instruccion">Elige y modifica tus productos</p>
     </div>
+    
+ <!--Progreso combos-->
+<div class="progreso-combos" id="progresoCombos">
 
-<!--Barra de progeso-->
-    <div class="progreso-combos" id="progresoCombos">
-
-    <div class="paso">
-        <span>1</span>
-        <p>Paso 1<br>Selecciona tu combo</p>
+    <!-- Fila de círculos y líneas -->
+    <div class="progreso-fila-circulos">
+        <div class="paso-circulo activo"><span>1</span></div>
+        <div class="linea"></div>
+        <div class="paso-circulo"><span>2</span></div>
+        <div class="linea"></div>
+        <div class="paso-circulo"><span>3</span></div>
     </div>
 
-    <div class="linea"></div>
-
-    <div class="paso">
-        <span>2</span>
-        <p>Paso 2<br>Personaliza</p>
-    </div>
-
-    <div class="linea"></div>
-
-    <div class="paso">
-        <span>3</span>
-        <p>Paso 3<br>Confirma</p>
+    <!-- Fila de labels debajo -->
+    <div class="progreso-fila-labels">
+        <div class="paso-label">
+            <p>Paso 1</p>
+            <p>Selecciona tu
+                <br> combo</p>
+        </div>
+        
+        <div class="paso-label">
+            <p>Paso 2</p>
+            <p>Personaliza tu 
+                <br> combo</p>
+        </div>
+        
+        <div class="paso-label">
+            <p>Paso 3</p>
+            <p>Confirma tu 
+                <br> combo</p>
+        </div>
     </div>
 
 </div>
     
 <!-- Grid de productos -->
 <main class="productos">
-
+ 
 <!-- Palomitas -->
     <div class="producto" data-seccion="alimentos" data-cat="palomitas">
         <div class="producto-img">
             <img src="dulceria imgs/Alimentos/Palomitas mantequilla.png" width="120">
         </div>
         <p class="producto-nombre">Palomitas Mantequilla</p>
-
+ 
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="palomitas">
         <div class="producto-img">
             <img src="dulceria imgs/Alimentos/Palomitas caramelo.png" width="120">
@@ -88,17 +99,17 @@
         <p class="producto-nombre">Palomitas Caramelo</p>
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="palomitas">
         <div class="producto-img">
             <img src="dulceria imgs/Alimentos/Palomitas Combinadas.png" width="120">
         </div>
         <p class="producto-nombre">Palomitas Combinadas</p>
         
-
+ 
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
 <!-- Papas -->
     <div class="producto" data-seccion="alimentos"data-cat="papas">
         <div class="producto-img">
@@ -114,14 +125,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="papas">
         <div class="producto-img">
             <img src="dulceria imgs/Alimentos/Platanos.png" width="120">
         </div>
         <p class="producto-nombre">Plátanos fritos</p>
         <p class="producto-precio">$31</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -130,34 +141,34 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
-
+ 
+ 
 <!--Dulces-->
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="dulces">
         <div class="producto-img">
             <img src="dulceria imgs/Dulces/Moritas.png" width="120">
         </div>
         <p class="producto-nombre">Moritas</p>
         <p class="producto-precio">$31</p>
-
+ 
     <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
         <span class="cantidad">0</span>
         <button class="btn-sumar"> <img src="Botones/Positivo/Mas.png" width="20"> </button>
     </div>
-
+ 
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="dulces">
         <div class="producto-img">
             <img src="dulceria imgs/Dulces/Pasas Lapose.png" width="120">
         </div>
         <p class="producto-nombre" style="font-size: 20px;">Passas Laposse</p>
         <p class="producto-precio">$31</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -166,14 +177,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="dulces">
         <div class="producto-img">
             <img src="dulceria imgs/Dulces/Dulcigomas.png" width="120">
         </div>
         <p class="producto-nombre">Dulcigomas</p>
         <p class="producto-precio">$31</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -182,14 +193,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="dulces">
         <div class="producto-img">
             <img src="dulceria imgs/Dulces/Panditas.png" width="120">
         </div>
         <p class="producto-nombre">Panditas</p>
         <p class="producto-precio">$31</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -198,14 +209,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="dulces">
         <div class="producto-img">
             <img src="dulceria imgs/Dulces/Paleta Payaso.png" width="120">
         </div>
         <p class="producto-nombre" style="font-size: 20px;">Paleta payaso</p>
         <p class="producto-precio">$31</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -214,14 +225,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="dulces">
         <div class="producto-img">
             <img src="dulceria imgs/Dulces/Almendras.png" width="120">
         </div>
         <p class="producto-nombre">Almendras</p>
         <p class="producto-precio">$31</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -230,14 +241,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="dulces">
         <div class="producto-img">
             <img src="dulceria imgs/Dulces/Chocoretas.png" width="120">
         </div>
         <p class="producto-nombre">Chocoretas</p>
         <p class="producto-precio">$31</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -246,7 +257,7 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" 
      data-id="dulce-kranky" 
      data-precio="31" 
@@ -259,7 +270,7 @@
     
     <p class="producto-nombre">Kranky</p>
     <p class="producto-precio">$31</p>
-
+ 
     <div class="contador">
         <button class="btn-restar"> 
             <img src="Botones/Positivo/Menos.png" width="20"> 
@@ -272,13 +283,13 @@
     
     <button class="btn-agregar">Agregar</button>
 </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="dulces">
         <div class="producto-img">
             <img src="dulceria imgs/Dulces/Bubulubu.png" width="120">
         </div>
         <p class="producto-nombre">Bubulubu</p><p class="producto-precio">$22</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -287,9 +298,9 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
 <!--Galletas-->
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="galletas">
         <div class="producto-img">
             <img src="dulceria imgs/Galletas/Chokis.png" width="120">
@@ -303,33 +314,33 @@
         <button class="btn-sumar"> <img src="Botones/Positivo/Mas.png" width="20"> </button>
     </div>
         <button class="btn-agregar">Agregar</button>
-
+ 
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="galletas">
         <div class="producto-img">
             <img src="dulceria imgs/Galletas/Florentinas.png" width="120">
         </div>
         <p class="producto-nombre">Florentinas</p>
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
             <div class="contador">
             <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
             <span class="cantidad">0</span>
             <button class="btn-sumar"> <img src="Botones/Positivo/Mas.png" width="20"> </button>
         </div>
-
+ 
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="galletas">
         <div class="producto-img">
             <img src="dulceria imgs/Galletas/Emperador.png" width="120">
         </div>
         <p class="producto-nombre">Emperador</p>
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
             <div class="contador">
             <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -338,33 +349,33 @@
         </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
 <!--Chocolates-->
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="chocolates">
         <div class="producto-img">
             <img src="dulceria imgs/Chocolates/Crunch.png" width="120">
         </div>
         <p class="producto-nombre">Crunch</p>
         <p class="producto-precio">$43</p>
-
+ 
     <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
         <span class="cantidad">0</span>
         <button class="btn-sumar"> <img src="Botones/Positivo/Mas.png" width="20"> </button>
     </div>
-
+ 
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="chocolates">
         <div class="producto-img">
             <img src="dulceria imgs/Chocolates/M&M.png" width="120">
         </div>
         <p class="producto-nombre">M&M</p>
         <p class="producto-precio">$43</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -373,14 +384,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="chocolates">
         <div class="producto-img">
             <img src="dulceria imgs/Chocolates/Lunetas.png" width="120">
         </div>
         <p class="producto-nombre">Lunetas</p>
         <p class="producto-precio">$43</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -389,14 +400,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="chocolates">
         <div class="producto-img">
             <img src="dulceria imgs/Chocolates/M & M Peanut.png" width="120">
         </div>
         <p class="producto-nombre" style="font-size: 20px;">M&M Peanuts</p>
         <p class="producto-precio">$43</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -405,14 +416,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="chocolates">
         <div class="producto-img">
             <img src="dulceria imgs/Chocolates/Milky Way.png" width="120">
         </div>
         <p class="producto-nombre">Milky Way</p>
         <p class="producto-precio">$43</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -421,14 +432,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="chocolates">
         <div class="producto-img">
             <img src="dulceria imgs/Chocolates/SnIckers.png" width="120">
         </div>
         <p class="producto-nombre">Snickers</p>
         <p class="producto-precio">$43</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -437,33 +448,33 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
 <!--Cacahuates-->
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="cacahuates">
         <div class="producto-img">
             <img src="dulceria imgs/Cacahuates/G Hot Nuts.png" width="120">
         </div>
         <p class="producto-nombre">Hot Nuts</p>
         <p class="producto-precio">$39</p>
-
+ 
     <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
         <span class="cantidad">0</span>
         <button class="btn-sumar"> <img src="Botones/Positivo/Mas.png" width="20"> </button>
     </div>
-
+ 
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="cacahuates">
         <div class="producto-img">
             <img src="dulceria imgs/Cacahuates/Golden Hot  Nuts.png" width="120">
         </div>
         <p class="producto-nombre" style="font-size: 20px;">Golden Nuts Enchilados</p>
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -472,14 +483,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="cacahuates">
         <div class="producto-img">
             <img src="dulceria imgs/Cacahuates/Golden Nuts Japonés.png" width="120">
         </div>
         <p class="producto-nombre"style="font-size: 20px;">Golden Nuts Japonés</p>
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -488,14 +499,14 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="alimentos"data-cat="cacahuates">
         <div class="producto-img">
             <img src="dulceria imgs/Cacahuates/Golden Nuts Sal y Limón.png" width="120">
         </div>
         <p class="producto-nombre" style="font-size: 20px;">Golden Nuts Sal y limón</p>
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
         <div class="contador">
         <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -504,9 +515,9 @@
     </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
 <!-- Bebidas-->
-
+ 
     <div class="producto" data-seccion="bebidas"data-cat="refrescos">
         <div class="producto-img">
             <img src="dulceria imgs/Bebidas/Refrescos/S Mundet.jpg" width="120">
@@ -514,7 +525,7 @@
         <p class="producto-nombre">Sidral Mundet</p>
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="bebidas"data-cat="refrescos">
         <div class="producto-img">
             <img src="dulceria imgs/Bebidas/Refrescos/Fanta.png" width="120">
@@ -522,17 +533,17 @@
         <p class="producto-nombre">Fanta</p>
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="bebidas"data-cat="refrescos">
         <div class="producto-img">
             <img src="dulceria imgs/Bebidas/Refrescos/CC Sin Azucar.png" width="120">
         </div>
         <p class="producto-nombre">Coca Cola Sin azúcar</p>
         
-
+ 
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="bebidas"data-cat="refrescos">
         <div class="producto-img">
             <img src="dulceria imgs/Bebidas/Refrescos/CC Light.png" width="120">
@@ -540,7 +551,7 @@
         <p class="producto-nombre">Coca Cola Light</p>
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="bebidas"data-cat="refrescos">
         <div class="producto-img">
             <img src="dulceria imgs/Bebidas/Refrescos/Coca Cola.webp" width="120">
@@ -548,23 +559,23 @@
         <p class="producto-nombre">Coca Cola regular</p>
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="bebidas" data-cat="refrescos">
         <div class="producto-img">
             <img src="dulceria imgs/Bebidas/Refrescos/Sprite.webp" width="120">
         </div>
         <p class="producto-nombre">Sprite</p>
         
-
+ 
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
 <!--Agua-->
     <div class="producto" data-seccion="bebidas" data-cat="agua">
         <div class="producto-img"> <img src="dulceria imgs/Bebidas/Agua/Ciel 600 ml.png" width="120"> </div>
         <p class="producto-nombre">Ciel 600 ml</p>
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
         <div class="contador">
             <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -573,12 +584,12 @@
         <button class="btn-agregar">Agregar</button>
         
     </div>
-
+ 
     <div class="producto" data-seccion="bebidas" data-cat="agua">
         <div class="producto-img"> <img src="dulceria imgs/Bebidas/Agua/Ciel 1 Lt.png" width="120"> </div>
         <p class="producto-nombre">Ciel 1 lt</p>
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
         <div class="contador">
             <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -590,7 +601,7 @@
         <div class="producto-img"> <img src="dulceria imgs/Bebidas/Agua/Ciel mineralizada.png" width="120"> </div>
         <p class="producto-nombre"style="font-size: 20px;">Ciel Mineralizada</p> 
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
         <div class="contador">
             <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -599,13 +610,13 @@
         <button class="btn-agregar">Agregar</button>
         
     </div>
-
+ 
 <!--Jugos-->
     <div class="producto" data-seccion="bebidas"data-cat="jugos">
         <div class="producto-img"> <img src="dulceria imgs/Bebidas/Jugos/Boing.png" width="120"> </div>
         <p class="producto-nombre">Boing</p>
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
         <div class="contador">
             <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -619,7 +630,7 @@
         <div class="producto-img"> <img src="dulceria imgs/Bebidas/Jugos/Del Valle frut.png" width="120"> </div>
         <p class="producto-nombre">Del Valle</p>
         <p class="producto-precio">$39</p>
-
+ 
         <!--Contador-->
         <div class="contador">
             <button class="btn-restar"> <img src="Botones/Positivo/Menos.png" width="20"> </button>
@@ -628,12 +639,12 @@
         </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="bebidas" data-cat="jugos">
         <div class="producto-img"> <img src="dulceria imgs/Bebidas/Jugos/Fuze Tea.png" width="120"> </div>
         <p class="producto-nombre">Fuze Tea</p>
         <p class="producto-precio">$45</p>
-
+ 
         <!--Contador-->
         <div class="contador">
             <button class="btn-restar"> <img src="Botones/Positivo/Mas.png" width="20"> </button>
@@ -642,7 +653,7 @@
         </div>
         <button class="btn-agregar">Agregar</button>
     </div>
-
+ 
 <!--Icee-->
     <div class="producto" data-seccion="bebidas" data-cat="icee">
         <div class="producto-img"> <img src="dulceria imgs/Bebidas/Icee/Icee Blueberry.png" width="120"> </div>
@@ -655,67 +666,67 @@
         <p class="producto-nombre">Icee Frutos rojos</p>
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
     <div class="producto" data-seccion="bebidas"data-cat="icee">
         <div class="producto-img"> <img src="dulceria imgs/Bebidas/Icee/Icee Mango.png" width="120"> </div>
         <p class="producto-nombre">Icee Mango</p>
         <button class="btn-seleccionar">Modificar</button>
     </div>
-
+ 
 <!-- Combos -->
-
+ 
 <div class="combo-card producto" data-seccion="combos" data-cat="individuales">
     <img src="dulceria imgs/Combos/Combo 1.png" class="combo-img">
-
+ 
     <p class="producto-nombre">Combo 1</p>
     <p class="producto-descripcion">Palomitas grandes, 2 bebidas y 1 chocolate</p>
-
+ 
     <span class="combo-precio">
         <p class="producto-precio">$178</p> <img src="Botones/Positivo/Flecha D_1.png "width="25px"> <p class="producto-precio">$185</p>
     </span>
-
+ 
     <button class="btn-combo" data-combo="1">Modificar</button>
 </div>
-
+ 
 <div class="combo-card producto" data-seccion="combos"data-cat="individuales">
     <img src="dulceria imgs/Combos/Combo 2.png" class="combo-img">
-
+ 
     <p class="producto-nombre">Combo 2</p>
     <p class="producto-descripcion">Palomitas grandes + 2 bebidas</p>
-
+ 
     <span class="combo-precio">
         <p class="producto-precio">$160</p> <img src="Botones/Positivo/Flecha D_1.png "width="25px"> <p class="producto-precio">$165</p>
     </span>
     
-
+ 
     <button class="btn-combo">Modificar</button>
 </div>
-
+ 
 <div class="combo-card producto" data-seccion="combos"data-cat="individuales">
     <img src="dulceria imgs/Combos/Combo 3.png" class="combo-img">
-
+ 
     <p class="producto-nombre">Combo 4</p>
     <p class="producto-descripcion">Palomitas chicas, 1 bebida y 1 gomitas </p>
-
+ 
     <span class="combo-precio">
         <p class="producto-precio">$105</p> <img src="Botones/Positivo/Flecha D_1.png "width="25px"> <p class="producto-precio">$115</p>
     </span>
-
+ 
     <button class="btn-combo">Modificar</button>
 </div>
 <div class="combo-card producto" data-seccion="combos"data-cat="individuales">
     <img src="dulceria imgs/Combos/Combo 4.png" class="combo-img">
-
+ 
     <h3>Combo 3</h3>
     <p>Palomitas medianas + bebida + dulces</p>
-
+ 
     <div class="combo-precio">
         <span>$120</span> → <strong>$132</strong>
     </div>
-
+ 
     <button class="btn-combo">Modificar</button>
 </div>
-
+ 
 <!--Modal Palomitas-->
 <div id="modal-palomitas" class="modal hidden">
     <div class="modal-content">
@@ -728,7 +739,7 @@
             <div class="modal-opciones-lista">
                 <p class="modal-producto">Palomitas Mantequilla</p>
                 <p class="modal-subtitulo">Selecciona el tamaño de tus palomitas</p>
-
+ 
                 <div class="fila-opcion" data-size="Palomitas pequeñas" data-precio="62">
                     <span class="fp-nombre">Palomitas pequeñas <span class="fp-oz">45 oz</span></span>
                     <span class="fp-precio">$62</span>
@@ -738,7 +749,7 @@
                         <button class="mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
                     </div>
                 </div>
-
+ 
                 <div class="fila-opcion" data-size="Palomitas medianas" data-precio="87">
                     <span class="fp-nombre">Palomitas medianas <span class="fp-oz">85 oz</span></span>
                     <span class="fp-precio">$87</span>
@@ -748,7 +759,7 @@
                         <button class="mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
                     </div>
                 </div>
-
+ 
                 <div class="fila-opcion" data-size="Palomitas grandes" data-precio="99">
                     <span class="fp-nombre">Palomitas grandes <span class="fp-oz">130 oz</span></span>
                     <span class="fp-precio">$99</span>
@@ -760,7 +771,7 @@
                 </div>
             </div>
         </div>
-
+ 
         <div class="modal-footer">
             <button class="cancelar" id="cancelar">
                 <img src="Botones/Positivo/Cancelar.png" width="16px"> Cancelar
@@ -769,20 +780,20 @@
         </div>
     </div>
 </div>
-
+ 
 <!--Modal Refrescos-->
 <div id="modal-refrescos" class="modal hidden">
     <div class="modal-content">
-
+ 
         <div class="modal-layout">
             <div class="modal-imagen">
                 <img id="refresco-img" src="" alt="Refresco">
             </div>
-
+ 
             <div class="modal-opciones-lista">
                 <p class="modal-producto" id="refresco-nombre">Refresco</p>
                 <p class="modal-subtitulo">Selecciona el tamaño de tu bebida</p>
-
+ 
                 <!-- Lata 600ml — solo cantidad, sin hielo -->
                 <div class="fila-refresco" data-size="Lata 600 ml" data-precio="20" data-hielo="false">
                     <span class="fr-nombre">Lata 600 ml</span>
@@ -794,7 +805,7 @@
                         <button class="fr-mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
                     </div>
                 </div>
-
+ 
                 <!-- Vaso mediano — con switch de hielo -->
                 <div class="fila-refresco" data-size="Vaso mediano" data-precio="39" data-hielo="true">
                     <span class="fr-nombre">Vaso mediano</span>
@@ -812,7 +823,7 @@
                         <button class="fr-mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
                     </div>
                 </div>
-
+ 
                 <!-- Vaso grande — con switch de hielo -->
                 <div class="fila-refresco" data-size="Vaso grande" data-precio="50" data-hielo="true">
                     <span class="fr-nombre">Vaso grande</span>
@@ -830,10 +841,10 @@
                         <button class="fr-mas"><img src="Botones/Positivo/Mas.png" width="20"></button>
                     </div>
                 </div>
-
+ 
             </div>
         </div>
-
+ 
         <div class="modal-footer">
             <button class="cancelar" id="cancelar-refresco">
                 <img src="Botones/Positivo/Cancelar.png" width="16px"> Cancelar
@@ -842,7 +853,7 @@
         </div>
     </div>
 </div>
-
+ 
 <!--Modal Icee-->
 <div id="modal-icee" class="modal hidden">
     <div class="modal-content">
@@ -889,59 +900,59 @@
         </div>
     </div>
 </div>
-
+ 
 </div>
     <!-- ── Vista del carrito ── -->
     <div id="vista-carrito"></div>
-
+ 
 <!-- ── Modal Combo 1 ── -->
 <div id="modal-combo1" class="combo-modal hidden">
     <div class="combo-modal-inner">
-
+ 
         <div class="combo-progreso">
             <div class="combo-paso activo" data-paso="1">
-                <span class="combo-paso-circulo">1</span>
+                <span class="combo-paso-circulo">1<img src="Botones/Positivo/Confirmar.png" alt="✓"></span>
                 <p class="combo-paso-label">Elige el sabor de<br>tus palomitas</p>
             </div>
             <div class="combo-linea"></div>
             <div class="combo-paso" data-paso="2">
-                <span class="combo-paso-circulo">2</span>
+                <span class="combo-paso-circulo">2<img src="Botones/Positivo/Confirmar.png" alt="✓"></span>
                 <p class="combo-paso-label">Paso 2</p>
             </div>
             <div class="combo-linea"></div>
             <div class="combo-paso" data-paso="3">
-                <span class="combo-paso-circulo">3</span>
+                <span class="combo-paso-circulo">3<img src="Botones/Positivo/Confirmar.png" alt="✓"></span>
                 <p class="combo-paso-label">Paso 3</p>
             </div>
             <div class="combo-linea"></div>
             <div class="combo-paso" data-paso="4">
-                <span class="combo-paso-circulo">4</span>
+                <span class="combo-paso-circulo">4<img src="Botones/Positivo/Confirmar.png" alt="✓"></span>
                 <p class="combo-paso-label">Paso 4</p>
             </div>
             <div class="combo-linea"></div>
             <div class="combo-paso" data-paso="5">
-                <span class="combo-paso-circulo">5</span>
+                <span class="combo-paso-circulo">5<img src="Botones/Positivo/Confirmar.png" alt="✓"></span>
                 <p class="combo-paso-label">Paso 5</p>
             </div>
         </div>
-
+ 
         <div class="combo-header">
             <div>
                 <p class="combo-titulo">Combo 1</p>
                 <p class="combo-desc">Palomitas grandes, 2 bebidas y 1 chocolate</p>
             </div>
-            <button class="cancelar" id="combo1-cancelar"> <img src="Botones/Positivo/Cancelar.png" width="16px"> Cancelar</button>
+            <button class="cancelar" id="combo1-cancelar">&#x2716; Cancelar</button>
         </div>
-
+ 
         <div class="combo-step" id="combo1-paso1">
             <div class="combo-cards-grid" id="combo1-palomitas-grid"></div>
         </div>
-
+ 
         <div class="combo-step hidden" id="combo1-paso2">
             <div class="combo-cards-grid" id="combo1-bebida1-grid"></div>
             <div class="combo-bebida-tipo hidden" id="combo1-bebida1-tipo">
                 <button class="combo-tipo-btn activo" data-tipo="vaso">Vaso mediano</button>
-                <button class="combo-tipo-btn" data-tipo="lata"> <img src="Botones/Negativo/Lata Btn.png" width="20" margin="8px">Lata</button>
+                <button class="combo-tipo-btn" data-tipo="lata">Lata</button>
                 <label class="switch-hielo" id="combo1-bebida1-hielo">
                     <span class="switch-label">Hielo</span>
                     <div class="switch-track">
@@ -951,12 +962,12 @@
                 </label>
             </div>
         </div>
-
+ 
         <div class="combo-step hidden" id="combo1-paso3">
             <div class="combo-cards-grid" id="combo1-bebida2-grid"></div>
             <div class="combo-bebida-tipo hidden" id="combo1-bebida2-tipo">
                 <button class="combo-tipo-btn activo" data-tipo="vaso">Vaso mediano</button>
-                <button class="combo-tipo-btn" data-tipo="lata"> <img src="Botones/Negativo/Lata Btn.png" width="20" margin="8px";> Lata</button>
+                <button class="combo-tipo-btn" data-tipo="lata">Lata</button>
                 <label class="switch-hielo" id="combo1-bebida2-hielo">
                     <span class="switch-label">Hielo</span>
                     <div class="switch-track">
@@ -966,33 +977,33 @@
                 </label>
             </div>
         </div>
-
+ 
         <div class="combo-step hidden" id="combo1-paso4">
             <div class="combo-cards-grid" id="combo1-chocolate-grid"></div>
         </div>
-
+ 
         <div class="combo-step hidden" id="combo1-paso5">
             <p class="combo-resumen-titulo">Confirma tu pedido</p>
             <p class="combo-resumen-subtitulo">Palomitas grandes, 2 bebidas y 1 chocolate</p>
             <div id="combo1-resumen-lista"></div>
         </div>
-
+ 
         <div class="combo-footer">
-            <button class="cancelar hidden" id="combo1-regresar"> <img src="Botones/Positivo/Flecha R.png" width="16px"> Regresar</button>
+            <button class="cancelar hidden" id="combo1-regresar">&#x21A9; Regresar</button>
             <div></div>
-            <button class="confirmar" id="combo1-confirmar"> <img src="Botones/Positivo/Confirmar.png" width="16px">Confirmar</button>
+            <button class="confirmar" id="combo1-confirmar">&#x2714; Confirmar</button>
         </div>
-
+ 
     </div>
 </div>
-
+ 
 </main>
-
+ 
     <div class="scroll-float" id="scrollBtn">
     <img id="scrollIcon" src="Botones/Positivo/Bajar.png" width="40px" alt="scroll">
 </div> 
-
-
+ 
+ 
     <!-- ── Modal de Confirmación ── -->
     <div id="modal-confirmacion">
         <div class="modal-conf-overlay"></div>
@@ -1011,17 +1022,37 @@
             </div>
         </div>
     </div>
-
+ 
     <!-- ── Toast de notificación ── -->
-    <div id="toast-notif"></div>
 
+    <!-- ── Modal de método de pago ── -->
+    <div id="modal-pago">
+        <div class="modal-conf-overlay" id="modal-pago-overlay"></div>
+        <div class="modal-pago-box">
+            <p class="modal-pago-titulo">Selecciona tu método de pago</p>
+            <div class="modal-pago-opciones">
+                <button class="modal-pago-btn" id="pago-tarjeta">
+                    <img src="Botones/Positivo/Ptarjetan.png" alt="Tarjeta">
+                    <span>Tarjeta</span>
+                </button>
+                <button class="modal-pago-btn" id="pago-efectivo">
+                    <img src="Botones/Positivo/Pefectivon.png" alt="Efectivo">
+                    <span>Efectivo</span>
+                </button>
+            </div>
+            <button class="cancelar modal-pago-cancelar" id="modal-pago-cancelar">&#x2716; Cancelar</button>
+        </div>
+    </div>
+
+    <div id="toast-notif"></div>
+ 
     <!-- ── Badge del carrito ── -->
     <span id="carrito-badge"></span>
-
-
-
-
+ 
+ 
+ 
+ 
 <script src="script.js"></script>
-
+ 
 </body>
 </html>

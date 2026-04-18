@@ -48,5 +48,18 @@ Dulcería Cineteca Nacional Chapultepec
 
 <script src="script.js"></script>
 
+<script>
+    window.addEventListener("load", () => {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("pago") === "ok") {
+            setTimeout(() => {
+                const msg = new SpeechSynthesisUtterance("Iniciar nuevo pedido");
+                msg.lang = "es-MX";
+                msg.rate = 1;
+                window.speechSynthesis.speak(msg);
+            }, 800);
+        }
+    });
+</script>
 </body>
 </html>
