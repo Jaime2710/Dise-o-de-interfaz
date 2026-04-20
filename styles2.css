@@ -1651,6 +1651,10 @@ justify-content: center;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:8px;
 }
 
 .combo-tipo-btn.activo {

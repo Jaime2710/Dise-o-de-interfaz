@@ -1069,10 +1069,24 @@ document.getElementById("combo1-cancelar")?.addEventListener("click", () => {
 });
 
 // Tipo vaso/lata para bebida 1
+// ── Actualiza imagen del botón Lata según estado activo/inactivo
+function actualizarImgLata(contenedorId) {
+    document.querySelectorAll(`#${contenedorId} .combo-tipo-btn`).forEach(b => {
+        const img = b.querySelector("img");
+        if (!img || b.dataset.tipo !== "lata") return;
+        if (b.classList.contains("activo")) {
+            img.src = "Botones/Positivo/Lata Btn.png";
+        } else {
+            img.src = "Botones/Negativo/Lata Btn.png";
+        }
+    });
+}
+
 document.querySelectorAll("#combo1-bebida1-tipo .combo-tipo-btn").forEach(btn => {
     btn.addEventListener("click", () => {
         document.querySelectorAll("#combo1-bebida1-tipo .combo-tipo-btn").forEach(b => b.classList.remove("activo"));
         btn.classList.add("activo");
+        actualizarImgLata("combo1-bebida1-tipo");
         const tipo = btn.dataset.tipo === "lata" ? "Lata" : "Vaso mediano";
         const hieloLabel = document.getElementById("combo1-bebida1-hielo");
         if (hieloLabel) hieloLabel.classList.toggle("hidden", btn.dataset.tipo === "lata");
@@ -1085,6 +1099,7 @@ document.querySelectorAll("#combo1-bebida2-tipo .combo-tipo-btn").forEach(btn =>
     btn.addEventListener("click", () => {
         document.querySelectorAll("#combo1-bebida2-tipo .combo-tipo-btn").forEach(b => b.classList.remove("activo"));
         btn.classList.add("activo");
+        actualizarImgLata("combo1-bebida2-tipo");
         const tipo = btn.dataset.tipo === "lata" ? "Lata" : "Vaso mediano";
         const hieloLabel = document.getElementById("combo1-bebida2-hielo");
         if (hieloLabel) hieloLabel.classList.toggle("hidden", btn.dataset.tipo === "lata");
