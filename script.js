@@ -67,7 +67,8 @@ document.querySelectorAll(".nav-btn").forEach(boton => {
             if (progreso) progreso.style.display = "flex";
             contenedorCategorias.style.display = "none";
             filtrarProductos(secciones.combos[0]);
-            textoInstruccion.textContent = "Presiona Modificar para personalizar tu combo"; // ← agregar
+            textoInstruccion.textContent = "Presiona Modificar para personalizar tu combo";
+            leerTexto("Presiona Modificar para personalizar tu combo"); // ← agregar
         } else {
             grid.classList.remove("combos");
             if (progreso) progreso.style.display = "none";
@@ -167,7 +168,7 @@ function abrirModalConfirmacion(datos) {
     document.getElementById("conf-total").textContent   = `Total: $${(datos.cantidad * datos.precio).toFixed(0)}`;
 
     modal.classList.add("visible");
-    leerTexto(`Agregar ${datos.cantidad} ${datos.nombre}`);
+    leerTexto(`${datos.cantidad} ${datos.nombre}, total ${(datos.cantidad * datos.precio).toFixed(0)} pesos`);
 
     document.getElementById("conf-agregar").onclick = () => {
         agregarAlCarrito(datos.id, datos.nombre, datos.variedad, datos.precio, datos.cantidad, datos.img);
@@ -477,7 +478,7 @@ function abrirConfirmacionPrevia(items, onConfirmar) {
     document.getElementById("conf-total").textContent  = `Total: $${total.toFixed(0)}`;
 
     modal.classList.add("visible");
-    leerTexto(`Total $${total.toFixed(0)}. ¿Confirmas tu pedido?`);
+    leerTexto(`${items.map(i => `${i.cantidad} ${i.nombre}`).join(", ")}, total ${total.toFixed(0)} pesos`);
 
     // Botón Agregar → ejecuta callback
     document.getElementById("conf-agregar").onclick = () => {
@@ -521,6 +522,31 @@ function mostrarCarrito() {
     if (!vistaCarrito) return;
     renderizarCarrito(vistaCarrito);
     vistaCarrito.classList.add("visible");
+    leerAudioCarrito();
+}
+
+function leerAudioCarrito() {
+    if (carrito.length === 0) {
+        leerTexto("Tu carrito está vacío. Agrega alimentos, bebidas o combos para completar tu pedido");
+        return;
+    }
+
+    // Instrucción
+    let texto = "Presiona Editar para hacer cambios en tu pedido o presiona pagar para continuar. ";
+
+    // Leer cada producto
+    texto += "Tu pedido incluye: ";
+    const items = carrito.map(item => {
+        const variedad = item.variedad ? `, ${item.variedad}` : "";
+        return `${item.cantidad} ${item.nombre}${variedad}`;
+    });
+    texto += items.join(". ");
+
+    // Total
+    const total = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
+    texto += `. Total ${total.toFixed(0)} pesos`;
+
+    leerTexto(texto);
 }
 
 // Productos que usan modal de tamanios — muestran boton Editar en el carrito
@@ -764,7 +790,7 @@ const COMBO1 = {
         bebidas: [
             { nombre: "Sidral Mundet",        img: "dulceria imgs/Bebidas/Refrescos/S Mundet.jpg",       esRefresco: true },
             { nombre: "Fanta",                img: "dulceria imgs/Bebidas/Refrescos/Fanta.png",           esRefresco: true },
-            { nombre: "Coca Cola",            img: "dulceria imgs/Bebidas/Refrescos/Coca Cola.webp",      esRefresco: true },
+            { nombre: "Coca Cola",            img: "dulceria imgs/Bebidas/Refrescos/Coca Cola.png",      esRefresco: true },
             { nombre: "Coca Cola Sin Azucar", img: "dulceria imgs/Bebidas/Refrescos/CC Sin Azucar.png",  esRefresco: true },
             { nombre: "Coca Cola Light",      img: "dulceria imgs/Bebidas/Refrescos/CC Light.png",       esRefresco: true },
             { nombre: "Sprite",               img: "dulceria imgs/Bebidas/Refrescos/Sprite.webp",         esRefresco: true },
@@ -880,6 +906,15 @@ function combo1RenderGrid(contenedorId, opciones, tipo) {
 }
 
 // ── Ir a un paso específico ──
+// Textos de audio para cada paso del combo
+const COMBO1_AUDIO = [
+    "Elige el sabor de tus palomitas",
+    "Elige tu primera bebida",
+    "Elige tu segunda bebida",
+    "Elige tu chocolate",
+    "Confirma tu pedido"
+];
+
 function combo1IrAPaso(paso) {
     COMBO1.estado.paso = paso;
 
@@ -889,6 +924,7 @@ function combo1IrAPaso(paso) {
     }
 
     combo1ActualizarProgreso(paso);
+    leerTexto(COMBO1_AUDIO[paso - 1]);
 
     // Footer: mostrar Regresar desde paso 2 en adelante
     const btnReg = document.getElementById("combo1-regresar");
@@ -1091,6 +1127,7 @@ document.querySelectorAll("#combo1-bebida1-tipo .combo-tipo-btn").forEach(btn =>
         const hieloLabel = document.getElementById("combo1-bebida1-hielo");
         if (hieloLabel) hieloLabel.classList.toggle("hidden", btn.dataset.tipo === "lata");
         if (COMBO1.estado.bebida1) COMBO1.estado.bebida1.tipo = tipo;
+        leerTexto(btn.dataset.tipo === "lata" ? "Bebida en lata" : "Vaso mediano");
     });
 });
 
@@ -1104,17 +1141,20 @@ document.querySelectorAll("#combo1-bebida2-tipo .combo-tipo-btn").forEach(btn =>
         const hieloLabel = document.getElementById("combo1-bebida2-hielo");
         if (hieloLabel) hieloLabel.classList.toggle("hidden", btn.dataset.tipo === "lata");
         if (COMBO1.estado.bebida2) COMBO1.estado.bebida2.tipo = tipo;
+        leerTexto(btn.dataset.tipo === "lata" ? "Bebida en lata" : "Vaso mediano");
     });
 });
 
 // Switch hielo bebida 1
 document.querySelector("#combo1-bebida1-hielo .fr-hielo-check")?.addEventListener("change", function() {
     if (COMBO1.estado.bebida1) COMBO1.estado.bebida1.hielo = this.checked;
+    leerTexto(this.checked ? "Con hielo" : "Sin hielo");
 });
 
 // Switch hielo bebida 2
 document.querySelector("#combo1-bebida2-hielo .fr-hielo-check")?.addEventListener("change", function() {
     if (COMBO1.estado.bebida2) COMBO1.estado.bebida2.hielo = this.checked;
+    leerTexto(this.checked ? "Con hielo" : "Sin hielo");
 });
 
 // Click en tarjeta de combo — intercepta solo Combo 1
