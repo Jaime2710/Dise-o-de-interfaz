@@ -1180,14 +1180,15 @@ function obtenerModalActivo() {
         "modal-refrescos",
         "modal-icee",
         "modal-combo1",
-        "modal-confirmacion"
+        "modal-confirmacion",
+        "modal-pago"
     ];
  
     for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
-        // modal-confirmacion usa clase "visible", el resto usa ausencia de "hidden"
-        if (id === "modal-confirmacion") {
+        // modal-confirmacion y modal-pago usan clase "visible", el resto usa ausencia de "hidden"
+        if (id === "modal-confirmacion" || id === "modal-pago") {
             if (el.classList.contains("visible")) return el;
         } else {
             if (!el.classList.contains("hidden")) return el;
@@ -1225,6 +1226,7 @@ function cerrarModalActivo() {
         "#cancelar-icee",      // modal icee
         "#combo1-cancelar",    // modal combo1
         "#conf-cancelar",      // modal confirmacion
+        "#modal-pago-cancelar",// modal pago
         ".cancelar"            // fallback genérico
     ];
  
