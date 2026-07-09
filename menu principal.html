@@ -1052,6 +1052,26 @@
  
  
  
+<!-- ── Firebase SDK ── -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<!-- ── Configuración de tu proyecto Firebase ── -->
+<script>
+    const firebaseConfig = {
+        apiKey:            "TU-API-KEY",
+        authDomain:        "TU-AUTH-DOMAIN",
+        projectId:         "TU-PROJECT-ID",
+        storageBucket:     "TU-STORAGE-BUCKET",
+        messagingSenderId: "TU-MESSAGING-SENDER-ID",
+        appId:             "TU-APP-ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+</script>
+
+<!-- ── Tu script principal ── -->
 <script src="script.js"></script>
  
 </body>

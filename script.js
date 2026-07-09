@@ -748,18 +748,76 @@ function abrirModalPago() {
     leerTexto("Selecciona tu metodo de pago");
 }
 
-document.getElementById("pago-tarjeta")?.addEventListener("click", () => {
+document.getElementById("pago-tarjeta")?.addEventListener("click", async () => {
     document.getElementById("modal-pago")?.classList.remove("visible");
-    mostrarToast("Pago con tarjeta seleccionado");
-    leerTexto("Pago con tarjeta");
-    setTimeout(() => { window.location.href = "index.html?pago=ok"; }, 1500);
+
+    try {
+        const ahora = new Date();
+        const total = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
+
+        await db.collection("pedidos").add({
+            fecha:          ahora.toLocaleDateString("es-MX"),
+            hora:           ahora.toLocaleTimeString("es-MX"),
+            timestamp:      Date.now(),
+            metodoPago:     "tarjeta",
+            estado:         "completado",
+            total:          total,
+            items:          carrito.map(i => ({
+                nombre:   i.nombre,
+                variedad: i.variedad || "",
+                cantidad: i.cantidad,
+                precio:   i.precio,
+                subtotal: i.precio * i.cantidad
+            }))
+        });
+
+        carrito = [];
+        actualizarBadgeCarrito();
+        mostrarToast("Pago con tarjeta registrado");
+        leerTexto("Pago con tarjeta registrado");
+        setTimeout(() => { window.location.href = "index.html?pago=ok"; }, 1500);
+
+    } catch (error) {
+        console.error("Error al guardar pedido:", error);
+        mostrarToast("Error al registrar el pago, intenta de nuevo");
+        leerTexto("Error al registrar el pago");
+    }
 });
 
-document.getElementById("pago-efectivo")?.addEventListener("click", () => {
+document.getElementById("pago-efectivo")?.addEventListener("click", async () => {
     document.getElementById("modal-pago")?.classList.remove("visible");
-    mostrarToast("Pago en efectivo seleccionado");
-    leerTexto("Pago en efectivo");
-    setTimeout(() => { window.location.href = "index.html?pago=ok"; }, 1500);
+
+    try {
+        const ahora = new Date();
+        const total = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
+
+        await db.collection("pedidos").add({
+            fecha:          ahora.toLocaleDateString("es-MX"),
+            hora:           ahora.toLocaleTimeString("es-MX"),
+            timestamp:      Date.now(),
+            metodoPago:     "efectivo",
+            estado:         "completado",
+            total:          total,
+            items:          carrito.map(i => ({
+                nombre:   i.nombre,
+                variedad: i.variedad || "",
+                cantidad: i.cantidad,
+                precio:   i.precio,
+                subtotal: i.precio * i.cantidad
+            }))
+        });
+
+        carrito = [];
+        actualizarBadgeCarrito();
+        mostrarToast("Pago en efectivo registrado");
+        leerTexto("Pago en efectivo registrado");
+        setTimeout(() => { window.location.href = "index.html?pago=ok"; }, 1500);
+
+    } catch (error) {
+        console.error("Error al guardar pedido:", error);
+        mostrarToast("Error al registrar el pago, intenta de nuevo");
+        leerTexto("Error al registrar el pago");
+    }
 });
 
 document.getElementById("modal-pago-cancelar")?.addEventListener("click", () => {
